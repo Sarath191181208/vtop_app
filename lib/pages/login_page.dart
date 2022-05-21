@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:vtop_app/pages/dialogs.dart';
+import 'package:vtop_app/test.dart';
 import '../StudentObject.dart';
 
 // function to get the Student details
@@ -67,9 +68,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   _handleLoginPress(BuildContext ctx) {
-    showLoaderDialog(ctx);
-
     if (_validateForm()) {
+      showLoaderDialog(ctx);
       Future<Student?> stu =
           _getStudent(_emailController.text, _passwordController.text);
       stu.then((stu) {
@@ -99,6 +99,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             onPressed: () => _handleLoginPress(context),
+            // onPressed: () => Navigator.pushReplacementNamed(context, '/details',
+            //     arguments: get_student_obj()),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20.0, 3.0, 20.0, 3.0),
               child: Row(
