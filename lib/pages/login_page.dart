@@ -225,10 +225,24 @@ class _LoginFormState extends State<LoginForm> {
       controller: widget.emailController,
       validator: _checkValidEmail,
       decoration: InputDecoration(
-        hintText: "21bce111",
+        hintText: "21BCE111",
         labelText: "VTOP User Name",
+        labelStyle: const TextStyle(
+          color: Colors.grey,
+        ),
+        prefixIcon: Icon(
+          Icons.account_circle,
+          color: Theme.of(context).primaryColor,
+        ),
+        // change the focus border color
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32.0),
+          borderSide: BorderSide(color: Theme.of(context).primaryColor),
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32.0),
+        ),
         contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
       autofocus: true,
     );
@@ -241,7 +255,18 @@ class _LoginFormState extends State<LoginForm> {
       decoration: InputDecoration(
           hintText: "password",
           labelText: "Password",
+          labelStyle: const TextStyle(
+            color: Colors.grey,
+          ),
+          prefixIcon: Icon(
+            Icons.lock,
+            color: Theme.of(context).primaryColor,
+          ),
           contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(32.0),
+            borderSide: BorderSide(color: Theme.of(context).primaryColor),
+          ),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
           suffixIcon: IconButton(
               onPressed: () {
@@ -251,6 +276,9 @@ class _LoginFormState extends State<LoginForm> {
               },
               icon: Icon(
                 _showPassword ? Icons.visibility : Icons.visibility_off,
+                color: _showPassword
+                    ? Theme.of(context).primaryColor
+                    : Colors.grey,
               ))),
       autofocus: true,
     );

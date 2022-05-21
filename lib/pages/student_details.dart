@@ -8,12 +8,6 @@ import 'package:vtop_app/pages/student_details_pages/profile_page.dart';
 import '../StudentObject.dart';
 import 'student_details_pages/time_table_page.dart';
 
-Color timeTableColor = const Color.fromRGBO(255, 51, 132, 1);
-Color attendanceColor = const Color.fromRGBO(0, 166, 255, 1);
-Color marksColor = const Color.fromRGBO(0, 207, 169, 1);
-Color marksSummaryColor = const Color.fromRGBO(112, 51, 255, 1);
-Color profileColor = const Color.fromRGBO(255, 87, 51, 1);
-
 class DetailsPage extends StatefulWidget {
   final Student studentDetails;
   const DetailsPage({Key? key, required this.studentDetails}) : super(key: key);
@@ -26,29 +20,25 @@ class _DetailsPageState extends State<DetailsPage> {
   // widget.studentDetails.profile.name
 
   final List<BottomNavigationBarItem> _bottomNavigationBarItems = [
-    BottomNavigationBarItem(
-      icon: const Icon(Icons.calendar_month_outlined),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.calendar_month_outlined),
       label: 'Time Table',
-      backgroundColor: timeTableColor,
     ),
-    BottomNavigationBarItem(
-      icon: const Icon(Icons.access_time),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.access_time),
       label: 'Attendance',
-      backgroundColor: attendanceColor,
     ),
-    BottomNavigationBarItem(
-        icon: const Icon(Icons.school_outlined),
-        label: 'Academics',
-        backgroundColor: marksColor),
-    BottomNavigationBarItem(
-      icon: const Icon(Icons.military_tech_outlined),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.school_outlined),
+      label: 'Academics',
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.military_tech_outlined),
       label: 'Summary',
-      backgroundColor: marksSummaryColor,
     ),
-    BottomNavigationBarItem(
-      icon: const Icon(Icons.person_outline),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.person_outline),
       label: 'Profile',
-      backgroundColor: profileColor,
     ),
   ];
 
@@ -65,6 +55,10 @@ class _DetailsPageState extends State<DetailsPage> {
     return Scaffold(
       body: _pages.elementAt(_pageIndex),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Theme.of(context).primaryColor,
+        unselectedItemColor: Theme.of(context).primaryColor.withOpacity(0.3),
         items: _bottomNavigationBarItems,
         currentIndex: _pageIndex,
         onTap: (index) {

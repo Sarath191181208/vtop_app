@@ -1,5 +1,4 @@
 import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:vtop_app/pages/student_details_pages/Components/sized_icon.dart';
 import 'package:vtop_app/pages/student_details_pages/Components/text_box_decoration.dart';
@@ -156,8 +155,17 @@ class TimeTableDayPage extends StatelessWidget {
     );
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(day),
+      bottomNavigationBar: BottomAppBar(
+        color: Theme.of(context).primaryColor,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(day, style: const TextStyle(color: Colors.white)),
+            ],
+          ),
+        ),
       ),
       body: (timeSlots == null)
           ? const NullPage(errorMsg: "No Time Table Found!, For this day")

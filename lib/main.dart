@@ -14,8 +14,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        primaryColor: Colors.blue,
+        primaryColor: Color.fromARGB(255, 243, 33, 138),
+        progressIndicatorTheme: const ProgressIndicatorThemeData(
+          color: Color.fromARGB(255, 243, 33, 138),
+          circularTrackColor: Color.fromARGB(255, 205, 205, 205),
+        ),
       ),
       initialRoute: '/login',
       onGenerateRoute: RouteGenerator.generateRoute,
