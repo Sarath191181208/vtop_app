@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vtop_app/StudentObject.dart';
@@ -23,7 +25,7 @@ class AttendancePage extends StatelessWidget {
   final List<AttendanceInfoSlot>? attendance;
   const AttendancePage({Key? key, this.attendance}) : super(key: key);
 
-  _header(String txt) {
+  Widget _header(String txt) {
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 8.0),
       child: Row(
@@ -40,7 +42,7 @@ class AttendancePage extends StatelessWidget {
     );
   }
 
-  _progressBar(double percent) {
+  Widget _progressBar(double percent, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
       child: Column(
@@ -59,6 +61,7 @@ class AttendancePage extends StatelessWidget {
                       value: percent / 100,
                       semanticsLabel: "Percentage of attendance is: ",
                       semanticsValue: "$percent%",
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 ),
@@ -73,7 +76,7 @@ class AttendancePage extends StatelessWidget {
     );
   }
 
-  _tile(String label, String trailing) {
+  Widget _tile(String label, String trailing) {
     return ListTile(
       title: Text(label),
       trailing: Text(trailing, style: const TextStyle(color: Colors.grey)),
@@ -101,7 +104,7 @@ class AttendancePage extends StatelessWidget {
                       children: [
                         _header(attdSlot.faculty),
                         const SizedBox(height: 20.0),
-                        _progressBar(attdSlot.percentage),
+                        _progressBar(attdSlot.percentage, context),
                         _tile(attdSlot.typeOfClass,
                             "${attdSlot.attended} /${attdSlot.totalClasses}"),
                         _tile(attdSlot.courseName, attdSlot.code),
