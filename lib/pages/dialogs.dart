@@ -1,7 +1,21 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 showLoaderDialog(BuildContext context) {
-  String loadingText = "Hang on tight ...";
+  List<String> _texts = [
+    'Loading...',
+    "Fetching data...",
+    "Hand on Tight",
+    "Almost There !",
+  ];
+
+  Stream<String> textStream() async* {
+    for (var i = 0; i < _texts.length; i++) {
+      yield _texts[i];
+      await Future.delayed(const Duration(seconds: 5));
+    }
+  }
 
   AlertDialog alert = AlertDialog(
     content: Container(
@@ -11,7 +25,11 @@ showLoaderDialog(BuildContext context) {
         children: [
           const CircularProgressIndicator(),
           const SizedBox(height: 16),
-          Text(loadingText)
+          StreamBuilder<String>(
+              stream: textStream(),
+              builder: (context, snapshot) {
+                return Text(snapshot.data.toString());
+              }),
         ],
       ),
       decoration: BoxDecoration(
