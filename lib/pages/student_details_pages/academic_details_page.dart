@@ -1,20 +1,9 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
+import 'package:vtop_app/pages/student_details_pages/Components/sized_icon.dart';
 
-import 'null_page.dart';
-
-BoxDecoration _textBoxDecoration = BoxDecoration(
-  color: Colors.white,
-  borderRadius: BorderRadius.circular(5.0),
-  boxShadow: [
-    BoxShadow(
-      color: Colors.black.withOpacity(0.1),
-      spreadRadius: 5,
-      blurRadius: 20,
-      offset: const Offset(0, 0), // changes position of shadow
-    ),
-  ],
-);
+import 'Components/null_page.dart';
+import 'Components/text_box_decoration.dart';
 
 class AcademicDetails extends StatelessWidget {
   final HashMap<String, String>? acadHist;
@@ -49,27 +38,23 @@ class AcademicDetails extends StatelessWidget {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 250.0),
-                  _acadIcon,
-                  const SizedBox(height: 30.0),
-                  ...[
-                    for (var acadHistEntry in acadHist!.entries)
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20.0, right: 20.0, bottom: 10.0),
-                        child: Container(
-                          decoration: _textBoxDecoration,
-                          child: ListTile(
-                            title: Text(acadHistEntry.key),
-                            trailing: Text(
-                              acadHistEntry.value,
-                              style: TextStyle(
-                                  color: _get_grade_color(acadHistEntry.value)),
-                            ),
+                  const SizedIcon(icon: Icons.school_outlined),
+                  for (var acadHistEntry in acadHist!.entries)
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20.0, right: 20.0, bottom: 10.0),
+                      child: Container(
+                        decoration: textBoxDecoration,
+                        child: ListTile(
+                          title: Text(acadHistEntry.key),
+                          trailing: Text(
+                            acadHistEntry.value,
+                            style: TextStyle(
+                                color: _get_grade_color(acadHistEntry.value)),
                           ),
                         ),
                       ),
-                  ],
+                    ),
                 ],
               ),
             ),

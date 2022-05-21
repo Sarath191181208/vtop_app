@@ -1,25 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vtop_app/StudentObject.dart';
+import 'package:vtop_app/pages/student_details_pages/Components/sized_icon.dart';
 
-import 'null_page.dart';
+import 'Components/null_page.dart';
+import 'Components/text_box_decoration.dart';
 
-Color _textBoxBgColor = const Color.fromRGBO(255, 255, 255, 1);
 Color _textBoxfontColor = const Color.fromRGBO(172, 172, 172, 1);
 Color _textBoxHeaderColor = Colors.black;
-
-BoxDecoration _textBoxDecoration = BoxDecoration(
-  color: _textBoxBgColor,
-  borderRadius: BorderRadius.circular(5.0),
-  boxShadow: [
-    BoxShadow(
-      color: Colors.black.withOpacity(0.1),
-      spreadRadius: 5,
-      blurRadius: 20,
-      offset: const Offset(0, 0), // changes position of shadow
-    ),
-  ],
-);
 
 class ProfilePage extends StatelessWidget {
   final Profile? studentProfile;
@@ -32,18 +20,8 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _userIcon =
-        Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
-      Icon(
-        Icons.person,
-        // color: Theme.of(context).primaryColor,
-        color: Color.fromRGBO(255, 87, 51, 1),
-        size: 50.0,
-      )
-    ]);
-
     final logoutButton = Container(
-        decoration: _textBoxDecoration,
+        decoration: textBoxDecoration,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(12.0, 10.0, 12.0, 10.0),
           child: Row(
@@ -82,9 +60,7 @@ class ProfilePage extends StatelessWidget {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 250.0),
-                  _userIcon,
-                  const SizedBox(height: 30.0),
+                  const SizedIcon(icon: Icons.person),
                   TextBox(
                     header: "Student Name",
                     text: studentProfile!.name,
@@ -128,7 +104,7 @@ class TextBox extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0),
       child: Container(
-        decoration: _textBoxDecoration,
+        decoration: textBoxDecoration,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(12.0, 20.0, 12.0, 20.0),
           child: Column(
