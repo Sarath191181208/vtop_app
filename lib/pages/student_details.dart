@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vtop_app/pages/student_details_pages/academic_details_page.dart';
 
 import 'package:vtop_app/pages/student_details_pages/academic_summary.dart';
+import 'package:vtop_app/pages/student_details_pages/attendance_page.dart';
 import 'package:vtop_app/pages/student_details_pages/profile_page.dart';
 
 import '../StudentObject.dart';
@@ -54,7 +55,7 @@ class _DetailsPageState extends State<DetailsPage> {
   Widget build(BuildContext context) {
     List<Widget> _pages = [
       const Center(child: Text('Time Table')),
-      const Center(child: Text('Attendance')),
+      AttendancePage(attendance: widget.studentDetails.getAttendace()),
       AcademicDetails(acadHist: widget.studentDetails.academicHistory.subjects),
       AcademicSummary(summary: widget.studentDetails.academicHistory.summary),
       ProfilePage(studentProfile: widget.studentDetails.profile),
