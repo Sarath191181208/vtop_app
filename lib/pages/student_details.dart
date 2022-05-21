@@ -6,6 +6,7 @@ import 'package:vtop_app/pages/student_details_pages/attendance_page.dart';
 import 'package:vtop_app/pages/student_details_pages/profile_page.dart';
 
 import '../StudentObject.dart';
+import 'student_details_pages/time_table_page.dart';
 
 Color timeTableColor = const Color.fromRGBO(255, 51, 132, 1);
 Color attendanceColor = const Color.fromRGBO(0, 166, 255, 1);
@@ -54,7 +55,7 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
     List<Widget> _pages = [
-      const Center(child: Text('Time Table')),
+      TimeTablePage(timetable: widget.studentDetails.getTimeTable()),
       AttendancePage(attendance: widget.studentDetails.getAttendace()),
       AcademicDetails(acadHist: widget.studentDetails.academicHistory.subjects),
       AcademicSummary(summary: widget.studentDetails.academicHistory.summary),
