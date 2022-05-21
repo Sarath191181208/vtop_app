@@ -75,7 +75,9 @@ class ProfilePage extends StatelessWidget {
 
     // render null if studentProfile is null
     return ((studentProfile == null)
-        ? const NullPage(errorMsg: "Error Can't seem to find the details")
+        ? const NullPage(
+            errorMsg:
+                "Error Can't seem to find the profile details try re-logging")
         : Scaffold(
             body: SingleChildScrollView(
               child: Column(

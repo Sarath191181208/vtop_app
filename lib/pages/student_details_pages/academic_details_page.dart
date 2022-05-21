@@ -44,7 +44,7 @@ class AcademicDetails extends StatelessWidget {
       )
     ]);
     return (acadHist == null)
-        ? const NullPage(errorMsg: "acadHist is null")
+        ? const NullPage(errorMsg: "Can't seem to find the academic details")
         : Scaffold(
             body: SingleChildScrollView(
               child: Column(
