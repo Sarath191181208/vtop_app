@@ -7,10 +7,10 @@ BoxDecoration textBoxDecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(5.0),
   boxShadow: [
     BoxShadow(
-      color: Colors.black.withOpacity(0.1),
-      spreadRadius: 5,
-      blurRadius: 20,
-      offset: const Offset(0, 0), // changes position of shadow
+      color: Colors.black.withOpacity(0.05),
+      spreadRadius: 2,
+      blurRadius: 2,
+      offset: const Offset(0, 2), // changes position of shadow
     ),
   ],
 );
