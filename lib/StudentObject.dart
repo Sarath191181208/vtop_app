@@ -30,20 +30,20 @@ class AcademicHistory {
   }
 }
 
-class _AttendanceInfoSlot {
+class AttendanceInfoSlot {
   int attended;
+  int totalClasses;
   String code;
   String courseName;
   String faculty;
   double percentage;
-  int totalClasses;
   String typeOfClass;
 
-  _AttendanceInfoSlot(this.attended, this.code, this.courseName, this.faculty,
+  AttendanceInfoSlot(this.attended, this.code, this.courseName, this.faculty,
       this.percentage, this.totalClasses, this.typeOfClass);
 
-  factory _AttendanceInfoSlot.fromJson(dynamic data) {
-    return _AttendanceInfoSlot(
+  factory AttendanceInfoSlot.fromJson(dynamic data) {
+    return AttendanceInfoSlot(
         int.parse(data["attended"]),
         data["code"],
         data["courseName"],
@@ -60,15 +60,15 @@ class _AttendanceInfoSlot {
 }
 
 class Attendance {
-  List<_AttendanceInfoSlot>? attendance;
+  List<AttendanceInfoSlot>? attendance;
   Attendance(this.attendance);
 
   factory Attendance.fromJson(dynamic data) {
     if (data == null) Attendance(null);
 
-    var attendance = <_AttendanceInfoSlot>[];
+    var attendance = <AttendanceInfoSlot>[];
     data.forEach((key, value) {
-      attendance.add(_AttendanceInfoSlot.fromJson(value));
+      attendance.add(AttendanceInfoSlot.fromJson(value));
     });
     return Attendance(attendance);
   }
@@ -99,39 +99,41 @@ class Profile {
   }
 }
 
-class _TimeSlot {
+class TimeSlot {
   String slot;
   String startTime;
   String endTime;
   String classRoom;
-  _TimeSlot(this.slot, this.startTime, this.endTime, this.classRoom);
-  factory _TimeSlot.fromJson(dynamic data) {
-    return _TimeSlot(
-        data["slot"], data["startTime"], data["endTime"], data["class"]);
+  String courseName;
+  TimeSlot(
+      this.slot, this.startTime, this.endTime, this.classRoom, this.courseName);
+  factory TimeSlot.fromJson(dynamic data) {
+    return TimeSlot(data["slot"], data["startTime"], data["endTime"],
+        data["class"], data["courseName"]);
   }
   @override
   String toString() {
-    return "TimeSlot{slot: $slot, startTime: $startTime, endTime: $endTime}";
+    return "TimeSlot{slot: $slot, startTime: $startTime, endTime: $endTime, classRoom: $classRoom, courseName: $courseName}";
   }
 }
 
 class TimeTable {
-  HashMap<String, List<_TimeSlot>>? timeTable;
+  HashMap<String, List<TimeSlot>>? timeTable;
   TimeTable(this.timeTable);
   factory TimeTable.fromJson(dynamic data) {
     if (data == null || data.length < 0) TimeTable(null);
 
-    HashMap<String, List<_TimeSlot>>? timeTable =
-        HashMap<String, List<_TimeSlot>>();
+    HashMap<String, List<TimeSlot>>? timeTable =
+        HashMap<String, List<TimeSlot>>();
     // converting timetable data from json to Hashmap
     // iterating throught each day
     data.forEach((day, classes) {
       // if only there's data in that day
       if (classes.length > 0) {
-        List<_TimeSlot> timeSlots = <_TimeSlot>[];
+        List<TimeSlot> timeSlots = <TimeSlot>[];
         // for every slot in a day
         classes.forEach((val) {
-          timeSlots.add(_TimeSlot.fromJson(val));
+          timeSlots.add(TimeSlot.fromJson(val));
         });
         timeTable[day] = timeSlots;
       }
@@ -159,7 +161,7 @@ class Student {
         TimeTable.fromJson(data["timetable"]));
   }
 
-  HashMap<String, List<_TimeSlot>>? getTimeTable() {
+  HashMap<String, List<TimeSlot>>? getTimeTable() {
     return timeTable.timeTable;
   }
 
@@ -171,7 +173,7 @@ class Student {
     return academicHistory;
   }
 
-  List<_AttendanceInfoSlot>? getAttendace() {
+  List<AttendanceInfoSlot>? getAttendace() {
     return attendance.attendance;
   }
 }
