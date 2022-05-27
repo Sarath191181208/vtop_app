@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vtop_app/pages/student_details_pages/Components/sized_icon.dart';
 import 'package:vtop_app/pages/student_details_pages/Components/text_box_decoration.dart';
 
-import '../../StudentObject.dart';
+import '../../Student/student_object.dart';
 import 'package:vtop_app/pages/student_details_pages/Components/null_page.dart';
 
 var timetableBoxDecoration = BoxDecoration(
@@ -46,7 +46,7 @@ class TimeTablePage extends StatelessWidget {
       Colors.black
     ];
 
-    _construct_day(String day) {
+    _constructDay(String day) {
       Color clr = clrs[days.indexOf(day) % clrs.length];
 
       _expandDay(BuildContext ctx) {
@@ -85,7 +85,6 @@ class TimeTablePage extends StatelessWidget {
 
     days.removeWhere((day) => timetable == null || timetable![day] == null);
 
-    print(timetable);
     return (timetable == null)
         ? const NullPage(errorMsg: "No Time Table Found! , For this sem")
         : Scaffold(
@@ -94,7 +93,7 @@ class TimeTablePage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(children: [
                   const SizedIcon(icon: Icons.calendar_month_outlined),
-                  for (int i = 0; i < days.length; i++) _construct_day(days[i]),
+                  for (int i = 0; i < days.length; i++) _constructDay(days[i]),
                 ]),
               ),
             ),

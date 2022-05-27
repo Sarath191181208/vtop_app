@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'pages/login_page.dart';
 import 'pages_router.dart';
 
 void main() {
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
           circularTrackColor: Color.fromRGBO(205, 205, 205, 1),
         ),
       ),
-      initialRoute: '/login',
+      initialRoute: '/',
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }

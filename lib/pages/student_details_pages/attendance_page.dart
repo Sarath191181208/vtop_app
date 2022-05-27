@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:vtop_app/StudentObject.dart';
+import 'package:vtop_app/Student/student_object.dart';
 import 'package:vtop_app/pages/student_details_pages/Components/null_page.dart';
 import 'package:vtop_app/pages/student_details_pages/Components/sized_icon.dart';
-
-import 'Components/text_box_decoration.dart';
 
 var _attendanceBoxDecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(20),

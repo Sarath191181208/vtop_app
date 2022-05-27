@@ -1,32 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:vtop_app/pages/dialogs.dart';
-import 'package:vtop_app/test.dart';
-import '../StudentObject.dart';
-
-// function to get the Student details
-Future<Student?> _getStudent(String username, String password) async {
-  //return null if the response took too long
-
-  var response = await http.post(
-      Uri.parse("https://vtop-api.herokuapp.com/api/v1/alldetails"),
-      headers: {},
-      body: {
-        'username': username,
-        'password': password
-      }).catchError((error) => print("Error $error"));
-  print("response code ${response.statusCode}");
-
-  if (response.statusCode == 200) {
-    var jsonResponse = json.decode(response.body);
-    return Student.fromJson(jsonResponse);
-  } else {
-    return null;
-  }
-}
+import '../Student/fetch_student_details.dart';
+import '../Student/student_object.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -47,12 +24,12 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
-    _emailController.dispose();
+    _userNameController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -62,8 +39,6 @@ class _LoginScreenState extends State<LoginScreen> {
     if (form == null || !form.validate()) {
       return false;
     }
-    print("email: " + _emailController.text);
-    print("passwd: " + _passwordController.text);
     return true;
   }
 
@@ -71,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_validateForm()) {
       showLoaderDialog(ctx);
       Future<Student?> stu =
-          _getStudent(_emailController.text, _passwordController.text);
+          getStudent(_userNameController.text, _passwordController.text);
       stu.then((stu) {
         // taking the loading animation off
         Navigator.pop(ctx);
@@ -136,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.only(top: 50.0),
             child: LoginForm(
                 formKey: _formKey,
-                emailController: _emailController,
+                emailController: _userNameController,
                 passwordController: _passwordController),
           ),
 

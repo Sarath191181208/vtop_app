@@ -1,8 +1,9 @@
 // build a basic router
 
 import 'package:flutter/material.dart';
+import 'package:vtop_app/pages/home.dart';
 
-import 'StudentObject.dart';
+import 'Student/student_object.dart';
 import '/pages/login_page.dart';
 import 'pages/student_details.dart';
 
@@ -10,6 +11,8 @@ class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
+      case '/':
+        return MaterialPageRoute(builder: (_) => const HomePage());
       case '/login':
         return MaterialPageRoute(builder: (_) => const LoginPage());
       case '/details':

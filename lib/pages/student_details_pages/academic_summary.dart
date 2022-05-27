@@ -23,7 +23,7 @@ class AcademicSummary extends StatelessWidget {
     "CreditsRegistered"
   ];
 
-  Color _get_grade_count_color(String s, double? d) {
+  Color _getGradeCountColor(String s, double? d) {
     if (d == null || d == 0.0) return Colors.grey;
 
     if (s.length < 2) {
@@ -62,7 +62,7 @@ class AcademicSummary extends StatelessWidget {
                         trailing: Text(
                           summary![summaryKey].toString(),
                           style: TextStyle(
-                              color: _get_grade_count_color(
+                              color: _getGradeCountColor(
                                   summaryKey, summary![summaryKey])),
                         ),
                       ),

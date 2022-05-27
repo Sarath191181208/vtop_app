@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:vtop_app/StudentObject.dart';
+import 'package:vtop_app/Student/student_object.dart';
 import 'package:vtop_app/pages/student_details_pages/Components/sized_icon.dart';
 
 import 'Components/null_page.dart';
