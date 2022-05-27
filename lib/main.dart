@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color.fromRGBO(243, 33, 138, 1),
         // cursorColor: ,
         textSelectionTheme: const TextSelectionThemeData(
-          selectionColor: Color.fromRGBO(243, 33, 138, 1),
+          cursorColor: Color.fromRGBO(243, 33, 138, 1),
         ),
         progressIndicatorTheme: const ProgressIndicatorThemeData(
           color: Color.fromRGBO(243, 33, 138, 1),

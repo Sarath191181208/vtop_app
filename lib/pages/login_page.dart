@@ -226,6 +226,7 @@ class _LoginFormState extends State<LoginForm> {
       validator: _checkValidEmail,
       decoration: InputDecoration(
         hintText: "21BCE111",
+        hintStyle: const TextStyle(color: Color.fromRGBO(180, 180, 180, 0.6)),
         labelText: "VTOP User Name",
         labelStyle: const TextStyle(
           color: Colors.grey,
@@ -253,7 +254,8 @@ class _LoginFormState extends State<LoginForm> {
       obscureText: !_showPassword,
       validator: _passwordValidation,
       decoration: InputDecoration(
-          hintText: "password",
+          hintText: "123456",
+          hintStyle: const TextStyle(color: Color.fromRGBO(180, 180, 180, 0.6)),
           labelText: "Password",
           labelStyle: const TextStyle(
             color: Colors.grey,
