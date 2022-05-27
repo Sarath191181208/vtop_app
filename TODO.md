@@ -1,0 +1,3 @@
+- [ ] Add a local storage for the user
+- [ ] Add a home i.e / page.
+- [ ] Refactor the code.
