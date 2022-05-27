@@ -14,10 +14,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primaryColor: Color.fromARGB(255, 243, 33, 138),
+        primaryColor: const Color.fromRGBO(243, 33, 138, 1),
+        // cursorColor: ,
+        textSelectionTheme: const TextSelectionThemeData(
+          selectionColor: Color.fromRGBO(243, 33, 138, 1),
+        ),
         progressIndicatorTheme: const ProgressIndicatorThemeData(
-          color: Color.fromARGB(255, 243, 33, 138),
-          circularTrackColor: Color.fromARGB(255, 205, 205, 205),
+          color: Color.fromRGBO(243, 33, 138, 1),
+          circularTrackColor: Color.fromRGBO(205, 205, 205, 1),
         ),
       ),
       initialRoute: '/login',
