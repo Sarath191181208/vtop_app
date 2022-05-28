@@ -141,37 +141,33 @@ class BoxButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: textBoxDecoration,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(12.0, 10.0, 12.0, 10.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextButton(
-                onPressed: _runFunction,
-                child: Row(
-                  children: [
-                    Text(
-                      text,
-                      style: TextStyle(
-                        color: color,
-                        fontSize: 16.0,
-                      ),
-                    ),
-                    const SizedBox(width: 10.0),
-                    (icon == null)
-                        ? const SizedBox(width: 0.0)
-                        : Icon(
-                            icon,
-                            color: color,
-                            size: 20.0,
-                          ),
-                  ],
+    return GestureDetector(
+      onTap: _runFunction,
+      child: Container(
+          decoration: textBoxDecoration,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(12.0, 18.0, 12.0, 18.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  text,
+                  style: TextStyle(
+                    color: color,
+                    fontSize: 16.0,
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ));
+                const SizedBox(width: 10.0),
+                (icon == null)
+                    ? const SizedBox(width: 0.0)
+                    : Icon(
+                        icon,
+                        color: color,
+                        size: 20.0,
+                      ),
+              ],
+            ),
+          )),
+    );
   }
 }
