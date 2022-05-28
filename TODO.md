@@ -2,4 +2,7 @@
 - [x] Add a update details button.
   - [x] Save Student details.
 - [x] Add a home i.e / page.
+- [ ] Add a theme change option.
+- [ ] Refactor the theming code.
+- [ ] Add a copy button to the student details.
 - [ ] Refactor the code.
