@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'pref_student.dart';
 import 'student_object.dart';
 
-Future<Student?> getStudent(String username, String password) async {
+Future<Student?> fetchStudentDetails(String username, String password) async {
   //return null if the response took too long
 
   var response = await http.post(
@@ -18,6 +18,7 @@ Future<Student?> getStudent(String username, String password) async {
     Student stu = Student.fromJson(jsonResponse);
 
     PrefStudent.saveStudentJSON(jsonResponse);
+    PrefStudent.saveLoginCredentials(username, password);
     return stu;
   } else {
     return null;

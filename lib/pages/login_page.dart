@@ -45,8 +45,8 @@ class _LoginScreenState extends State<LoginScreen> {
   _handleLoginPress(BuildContext ctx) {
     if (_validateForm()) {
       showLoaderDialog(ctx);
-      Future<Student?> stu =
-          getStudent(_userNameController.text, _passwordController.text);
+      Future<Student?> stu = fetchStudentDetails(
+          _userNameController.text, _passwordController.text);
       stu.then((stu) {
         // taking the loading animation off
         Navigator.pop(ctx);
