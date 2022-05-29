@@ -1,7 +1,7 @@
 // build a basic router
 
 import 'package:flutter/material.dart';
-import 'package:vtop_app/pages/home.dart';
+import '/pages/home.dart';
 
 import 'Student/student_object.dart';
 import '/pages/login_page.dart';

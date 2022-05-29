@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../Student/pref_student.dart';
+import '../prefs/pref_student.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

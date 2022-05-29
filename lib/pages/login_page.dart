@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:vtop_app/pages/dialogs.dart';
+import '/pages/dialogs.dart';
 import '../Student/fetch_student_details.dart';
 import '../Student/student_object.dart';
 

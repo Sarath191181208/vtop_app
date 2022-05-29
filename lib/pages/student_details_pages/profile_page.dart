@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vtop_app/Student/pref_student.dart';
-import 'package:vtop_app/Student/student_object.dart';
-import 'package:vtop_app/pages/student_details_pages/Components/sized_icon.dart';
+import '../../prefs/pref_student.dart';
+import '/Student/student_object.dart';
+import '/pages/student_details_pages/Components/sized_icon.dart';
 
 import '../../Student/fetch_student_details.dart';
 import '../dialogs.dart';

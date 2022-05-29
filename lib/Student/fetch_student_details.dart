@@ -2,7 +2,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'pref_student.dart';
+import '../prefs/pref_student.dart';
 import 'student_object.dart';
 
 Future<Student?> fetchStudentDetails(String username, String password) async {

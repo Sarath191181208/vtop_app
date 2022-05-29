@@ -1,8 +1,8 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:vtop_app/pages/student_details_pages/Components/null_page.dart';
-import 'package:vtop_app/pages/student_details_pages/Components/sized_icon.dart';
+import '/pages/student_details_pages/Components/null_page.dart';
+import '/pages/student_details_pages/Components/sized_icon.dart';
 
 import 'Components/text_box_decoration.dart';
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vtop_app/pages/student_details_pages/academic_details_page.dart';
+import '/pages/student_details_pages/academic_details_page.dart';
 
-import 'package:vtop_app/pages/student_details_pages/academic_summary.dart';
-import 'package:vtop_app/pages/student_details_pages/attendance_page.dart';
-import 'package:vtop_app/pages/student_details_pages/profile_page.dart';
+import '/pages/student_details_pages/academic_summary.dart';
+import '/pages/student_details_pages/attendance_page.dart';
+import '/pages/student_details_pages/profile_page.dart';
 
 import '../Student/student_object.dart';
 import 'student_details_pages/time_table_page.dart';

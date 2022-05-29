@@ -1,5 +1,5 @@
-import 'student_object.dart';
-import '../prefs.dart';
+import '../Student/student_object.dart';
+import 'prefs.dart';
 
 class PrefStudent {
   static const String key = 'student_data';

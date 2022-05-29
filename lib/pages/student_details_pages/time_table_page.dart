@@ -1,10 +1,10 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
-import 'package:vtop_app/pages/student_details_pages/Components/sized_icon.dart';
-import 'package:vtop_app/pages/student_details_pages/Components/text_box_decoration.dart';
+import '/pages/student_details_pages/Components/sized_icon.dart';
+import '/pages/student_details_pages/Components/text_box_decoration.dart';
 
 import '../../Student/student_object.dart';
-import 'package:vtop_app/pages/student_details_pages/Components/null_page.dart';
+import '/pages/student_details_pages/Components/null_page.dart';
 
 var timetableBoxDecoration = BoxDecoration(
   color: Colors.white,
