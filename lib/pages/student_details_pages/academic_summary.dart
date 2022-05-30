@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import '../../theme_manager.dart';
 import '/pages/student_details_pages/Components/null_page.dart';
 import '/pages/student_details_pages/Components/sized_icon.dart';
 
@@ -23,7 +24,7 @@ class AcademicSummary extends StatelessWidget {
     "CreditsRegistered"
   ];
 
-  Color _getGradeCountColor(String s, double? d) {
+  _getGradeCountColor(String s, double? d) {
     if (d == null || d == 0.0) return Colors.grey;
 
     if (s.length < 2) {
@@ -36,11 +37,13 @@ class AcademicSummary extends StatelessWidget {
       if (d >= 8.0) return Colors.green;
       if (d >= 5 && d < 8) return const Color.fromRGBO(249, 187, 0, 1);
     }
-    return Colors.black;
+    // return Colors.black;
   }
 
   @override
   Widget build(BuildContext context) {
+    var boxClr = Theme.of(context).extension<MyColors>()!.boxColor;
+
     return (summary == null)
         ? const NullPage(errorMsg: "No academic Summary Found !")
         : Scaffold(
@@ -54,7 +57,7 @@ class AcademicSummary extends StatelessWidget {
                         left: 20.0, right: 20.0, bottom: 10.0),
                     child: Container(
                       // grey border bottomm
-                      decoration: textBoxDecoration,
+                      decoration: getTextBoxDecoration(boxClr!),
                       child: ListTile(
                         title: Text(
                           summaryKey,

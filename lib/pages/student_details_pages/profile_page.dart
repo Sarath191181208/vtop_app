@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../prefs/pref_student.dart';
+import '../../theme_manager.dart';
 import '/Student/student_object.dart';
 import '/pages/student_details_pages/Components/sized_icon.dart';
 
@@ -8,8 +10,8 @@ import '../dialogs.dart';
 import 'Components/null_page.dart';
 import 'Components/text_box_decoration.dart';
 
-Color _textBoxfontColor = const Color.fromRGBO(172, 172, 172, 1);
-Color _textBoxHeaderColor = Colors.black;
+Color _textBoxfontColor = Colors.grey;
+// Color _textBoxHeaderColor = Colors.black;
 
 class ProfilePage extends StatelessWidget {
   final Profile? studentProfile;
@@ -54,6 +56,15 @@ class ProfilePage extends StatelessWidget {
         color: const Color.fromRGBO(219, 197, 0, 1),
         icon: Icons.update_rounded);
 
+    var _changeThemeButton = Consumer<ThemeNotifier>(
+      builder: (context, notifier, child) => BoxButton(
+        onPressHandler: () => notifier.toggleTheme(),
+        text: 'Change Theme',
+        color: Colors.blue,
+        icon: Icons.brightness_3,
+      ),
+    );
+
     var _profileTiles = [
       const SizedIcon(icon: Icons.person),
       TextBox(header: "Student Name", text: studentProfile!.name),
@@ -63,6 +74,7 @@ class ProfilePage extends StatelessWidget {
       TextBox(header: "Proctor Email", text: studentProfile!.proctorEmail),
       _updateButton,
       _logoutButton,
+      _changeThemeButton,
     ];
 
     // render null if studentProfile is null
@@ -93,8 +105,9 @@ class TextBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var boxClr = Theme.of(context).extension<MyColors>()!.boxColor;
     return Container(
-      decoration: textBoxDecoration,
+      decoration: getTextBoxDecoration(boxClr!),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(12.0, 20.0, 12.0, 20.0),
         child: Column(
@@ -102,7 +115,7 @@ class TextBox extends StatelessWidget {
           children: [
             Text(
               "$header :",
-              style: TextStyle(color: _textBoxHeaderColor, fontSize: 20.0),
+              style: TextStyle(fontSize: 20.0),
             ),
             // const SizedBox(height: 10.0),
             Row(
@@ -141,10 +154,12 @@ class BoxButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var boxClr = Theme.of(context).extension<MyColors>()!.boxColor;
+
     return GestureDetector(
       onTap: _runFunction,
       child: Container(
-          decoration: textBoxDecoration,
+          decoration: getTextBoxDecoration(boxClr!),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(12.0, 18.0, 12.0, 18.0),
             child: Row(

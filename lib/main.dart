@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'pages_router.dart';
+import 'theme_manager.dart';
 
 void main() {
-  runApp(const MyApp());
+  return runApp(ChangeNotifierProvider<ThemeNotifier>(
+    create: (_) => ThemeNotifier(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -10,21 +15,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primaryColor: const Color.fromRGBO(243, 33, 138, 1),
-        // cursorColor: ,
-        textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: Color.fromRGBO(243, 33, 138, 1),
-        ),
-        progressIndicatorTheme: const ProgressIndicatorThemeData(
-          color: Color.fromRGBO(243, 33, 138, 1),
-          circularTrackColor: Color.fromRGBO(205, 205, 205, 1),
-        ),
-      ),
-      initialRoute: '/',
-      onGenerateRoute: RouteGenerator.generateRoute,
+    return Consumer<ThemeNotifier>(
+      builder: (context, notifier, _) {
+        return MaterialApp(
+          title: 'Flutter Demo',
+          theme: notifier.getTheme(),
+          initialRoute: '/',
+          onGenerateRoute: RouteGenerator.generateRoute,
+        );
+      },
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
+import 'package:vtop_app/theme_manager.dart';
 import '/pages/student_details_pages/Components/sized_icon.dart';
 
 import 'Components/null_page.dart';
@@ -18,11 +19,13 @@ class AcademicDetails extends StatelessWidget {
     if (s == "E") return Colors.red;
     if (s == "F") return Colors.red;
 
-    return Colors.black;
+    // return Colors.black;
   }
 
   @override
   Widget build(BuildContext context) {
+    var boxClr = Theme.of(context).extension<MyColors>()!.boxColor;
+
     return (acadHist == null)
         ? const NullPage(errorMsg: "Can't seem to find the academic details")
         : Scaffold(
@@ -35,7 +38,7 @@ class AcademicDetails extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 20.0, right: 20.0, bottom: 10.0),
                       child: Container(
-                        decoration: textBoxDecoration,
+                        decoration: getTextBoxDecoration(boxClr!),
                         child: ListTile(
                           title: Text(acadHistEntry.key),
                           trailing: Text(

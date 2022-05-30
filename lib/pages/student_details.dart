@@ -54,10 +54,8 @@ class _DetailsPageState extends State<DetailsPage> {
     return Scaffold(
       body: _pages.elementAt(_pageIndex),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Theme.of(context).primaryColor,
-        unselectedItemColor: Theme.of(context).primaryColor.withOpacity(0.3),
         items: _bottomNavigationBarItems,
         currentIndex: _pageIndex,
         onTap: (index) {

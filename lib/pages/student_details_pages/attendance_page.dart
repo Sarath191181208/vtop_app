@@ -1,20 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../theme_manager.dart';
 import '/Student/student_object.dart';
 import '/pages/student_details_pages/Components/null_page.dart';
 import '/pages/student_details_pages/Components/sized_icon.dart';
-
-var _attendanceBoxDecoration = BoxDecoration(
-  borderRadius: BorderRadius.circular(20),
-  color: Colors.white,
-  boxShadow: [
-    BoxShadow(
-      color: Colors.black.withOpacity(0.05),
-      spreadRadius: 5,
-      blurRadius: 4,
-      offset: const Offset(0, 4), // changes position of shadow
-    ),
-  ],
-);
+import 'Components/text_box_decoration.dart';
 
 class AttendancePage extends StatelessWidget {
   final List<AttendanceInfoSlot>? attendance;
@@ -80,6 +69,16 @@ class AttendancePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var boxClr = Theme.of(context).extension<MyColors>()!.boxColor;
+
+    var _attendanceBoxDecoration = getTextBoxDecoration(
+      boxClr!,
+      borderRadius: 20.0,
+      spreadRadius: 5,
+      blurRadius: 4,
+      offset: const Offset(0, 4),
+    );
+
     if ((attendance == null)) {
       return const NullPage(errorMsg: "No attendance data found for this sem.");
     } else {

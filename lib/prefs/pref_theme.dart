@@ -1,6 +1,6 @@
 import 'prefs.dart';
 
-class PrefStudent {
+class PrefTheme {
   static const String key = 'isDark';
 
   static saveTheme(bool isDark) async {

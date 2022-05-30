@@ -1,23 +1,11 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
+import '../../theme_manager.dart';
 import '/pages/student_details_pages/Components/sized_icon.dart';
 import '/pages/student_details_pages/Components/text_box_decoration.dart';
 
 import '../../Student/student_object.dart';
 import '/pages/student_details_pages/Components/null_page.dart';
-
-var timetableBoxDecoration = BoxDecoration(
-  color: Colors.white,
-  borderRadius: BorderRadius.circular(10.0),
-  boxShadow: [
-    BoxShadow(
-      color: Colors.black.withOpacity(0.05),
-      spreadRadius: 2,
-      blurRadius: 2,
-      offset: const Offset(0, 2), // changes position of shadow
-    ),
-  ],
-);
 
 class TimeTablePage extends StatelessWidget {
   final HashMap<String, List<TimeSlot>>? timetable;
@@ -35,19 +23,19 @@ class TimeTablePage extends StatelessWidget {
       'Sunday'
     ];
 
-    List<Color> clrs = [
-      // Color.fromARGB(255, 241, 32, 154),
-      // Colors.blue.shade900,
-      // // Colors.green.shade900,
-      // Colors.red.shade900,
-      // Colors.pink.shade700,
-      // Colors.orange.shade900,
-      // Colors.yellow.shade900,
-      Colors.black
-    ];
+    // List<Color> clrs = [
+    //   Color.fromARGB(255, 241, 32, 154),
+    //   Colors.blue.shade900,
+    //   // Colors.green.shade900,
+    //   Colors.red.shade900,
+    //   Colors.pink.shade700,
+    //   Colors.orange.shade900,
+    //   Colors.yellow.shade900,
+    //   Colors.black
+    // ];
 
     _constructDay(String day) {
-      Color clr = clrs[days.indexOf(day) % clrs.length];
+      // Color clr = clrs[days.indexOf(day) % clrs.length];
 
       _expandDay(BuildContext ctx) {
         Navigator.of(context).push(MaterialPageRoute<void>(
@@ -56,6 +44,7 @@ class TimeTablePage extends StatelessWidget {
         ));
       }
 
+      var boxClr = Theme.of(context).extension<MyColors>()!.boxColor;
       return Padding(
         padding: const EdgeInsets.all(8.0),
         child: GestureDetector(
@@ -63,7 +52,7 @@ class TimeTablePage extends StatelessWidget {
           child: Hero(
             tag: day,
             child: Container(
-              decoration: textBoxDecoration,
+              decoration: getTextBoxDecoration(boxClr!),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(8.0, 20.0, 8.0, 20.0),
                 child: Row(
@@ -72,7 +61,7 @@ class TimeTablePage extends StatelessWidget {
                     Text(
                       day,
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 20.0, color: clr),
+                      style: const TextStyle(fontSize: 20.0),
                     ),
                   ],
                 ),
@@ -153,6 +142,10 @@ class TimeTableDayPage extends StatelessWidget {
       ),
     );
 
+    var boxClr = Theme.of(context).extension<MyColors>()!.boxColor;
+    var timetableBoxDecoration =
+        getTextBoxDecoration(boxClr!, borderRadius: 10);
+
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
         color: Theme.of(context).primaryColor,
@@ -161,7 +154,7 @@ class TimeTableDayPage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(day, style: const TextStyle(color: Colors.white)),
+              Text(day),
             ],
           ),
         ),
@@ -183,7 +176,7 @@ class TimeTableDayPage extends StatelessWidget {
                         child: Column(
                           children: [
                             timeSlotHeader,
-                            const Divider(color: Colors.black),
+                            const Divider(),
                             for (var i in timeSlots!) _getSlotInfoWidget(i),
                           ],
                         ),
