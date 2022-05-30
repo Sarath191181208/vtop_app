@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../prefs/pref_student.dart';
 import '../../theme_manager.dart';
@@ -103,32 +104,50 @@ class TextBox extends StatelessWidget {
   const TextBox({Key? key, required this.header, required this.text})
       : super(key: key);
 
+  _copyText(BuildContext context) {
+    {
+      var snackBar = SnackBar(
+        content: Text('$header Copied to Clipboard'),
+        duration: const Duration(seconds: 1),
+      );
+      Clipboard.setData(ClipboardData(text: text)).then((value) =>
+          ScaffoldMessenger.of(context)
+              .showSnackBar(snackBar)); // -> show a notification
+    }
+  }
+
+  _getFlexText() {
+    return Row(
+      children: [
+        Flexible(
+          child: Text(
+            text,
+            style: TextStyle(color: _textBoxfontColor),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var boxClr = Theme.of(context).extension<MyColors>()!.boxColor;
-    return Container(
-      decoration: getTextBoxDecoration(boxClr!),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(12.0, 20.0, 12.0, 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "$header :",
-              style: const TextStyle(fontSize: 20.0),
-            ),
-            // const SizedBox(height: 10.0),
-            Row(
-              children: [
-                Flexible(
-                  child: Text(
-                    text,
-                    style: TextStyle(color: _textBoxfontColor),
-                  ),
-                ),
-              ],
-            ),
-          ],
+    return GestureDetector(
+      onTap: () => _copyText(context),
+      child: Container(
+        decoration: getTextBoxDecoration(boxClr!),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(12.0, 20.0, 12.0, 20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "$header :",
+                style: const TextStyle(fontSize: 20.0),
+              ),
+              _getFlexText()
+            ],
+          ),
         ),
       ),
     );

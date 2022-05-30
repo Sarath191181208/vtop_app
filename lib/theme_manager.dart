@@ -56,6 +56,10 @@ class ThemeNotifier with ChangeNotifier {
       selectedItemColor: primaryColor,
       unselectedItemColor: primaryColor.withOpacity(0.5),
     ),
+    snackBarTheme: const SnackBarThemeData(
+        backgroundColor: Colors.black,
+        actionTextColor: Colors.grey,
+        contentTextStyle: TextStyle(color: Colors.white)),
     backgroundColor: Colors.black,
   ).copyWith(extensions: <ThemeExtension<dynamic>>[
     const MyColors(
@@ -80,6 +84,10 @@ class ThemeNotifier with ChangeNotifier {
       selectedItemColor: primaryColor,
       unselectedItemColor: primaryColor.withOpacity(0.3),
     ),
+    snackBarTheme: const SnackBarThemeData(
+        backgroundColor: Colors.white,
+        actionTextColor: Colors.grey,
+        contentTextStyle: TextStyle(color: Colors.black)),
     dividerColor: Colors.black12,
   ).copyWith(extensions: <ThemeExtension<dynamic>>[
     const MyColors(
