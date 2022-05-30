@@ -10,7 +10,7 @@ class PrefTheme {
 
   static isDark() async {
     var pref = SharedPref();
-    var data = await pref.get(key);
+    bool? data = await pref.getBool(key);
     return (data == null) ? false : data;
   }
 }

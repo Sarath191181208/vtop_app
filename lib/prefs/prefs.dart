@@ -9,6 +9,13 @@ class SharedPref {
     return (data == null) ? null : json.decode(data);
   }
 
+  getBool(String key) async {
+    final prefs = await SharedPreferences.getInstance();
+    bool? data = prefs.getBool(key);
+
+    return (data == null) ? null : data;
+  }
+
   save(String key, value) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString(key, json.encode(value));

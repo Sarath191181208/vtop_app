@@ -88,14 +88,14 @@ class ThemeNotifier with ChangeNotifier {
     ),
   ]);
 
-  bool _isDarkTheme = true;
+  bool _isDarkTheme = false;
 
   ThemeData getTheme() => _isDarkTheme ? darkTheme : lightTheme;
 
   ThemeNotifier() {
     var isDark = PrefTheme.isDark();
     isDark.then((value) {
-      // _isDarkTheme = value;
+      _isDarkTheme = value;
       notifyListeners();
     });
   }

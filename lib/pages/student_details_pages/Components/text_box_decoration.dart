@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-Color white = Color.fromRGBO(255, 255, 255, 1);
 BoxDecoration getTextBoxDecoration(
   Color textBoxBgColor, {
   double borderRadius = 5.0,

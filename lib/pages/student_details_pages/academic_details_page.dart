@@ -18,8 +18,6 @@ class AcademicDetails extends StatelessWidget {
     if (s == "D") return Colors.orange;
     if (s == "E") return Colors.red;
     if (s == "F") return Colors.red;
-
-    // return Colors.black;
   }
 
   @override

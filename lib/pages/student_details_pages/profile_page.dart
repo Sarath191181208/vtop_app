@@ -115,7 +115,7 @@ class TextBox extends StatelessWidget {
           children: [
             Text(
               "$header :",
-              style: TextStyle(fontSize: 20.0),
+              style: const TextStyle(fontSize: 20.0),
             ),
             // const SizedBox(height: 10.0),
             Row(
