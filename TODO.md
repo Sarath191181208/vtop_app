@@ -6,7 +6,7 @@
 - [x] Refactor the theming code.
 - [x] Add back button in the time table details page.
 - [x] Add a copy button to the student details.
-- [ ] Change spacer from the static value to relative.
+- [x] Change spacer from the static value to relative.
 - [ ] Notifications at the time of class.
 - [ ] Settings page ?
 - [ ] Refactor the code.

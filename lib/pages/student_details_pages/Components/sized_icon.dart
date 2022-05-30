@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class SizedIcon extends StatelessWidget {
@@ -19,10 +21,11 @@ class SizedIcon extends StatelessWidget {
         size: size?.toDouble() ?? 50.0,
       )
     ]);
+    double windowHeight = MediaQuery.of(context).size.height;
 
     return Column(
       children: [
-        const SizedBox(height: 250.0),
+        SizedBox(height: (windowHeight * 0.4)),
         _icon,
         const SizedBox(height: 30.0),
       ],
