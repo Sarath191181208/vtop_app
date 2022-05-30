@@ -4,8 +4,7 @@
 - [x] Add a home i.e / page.
 - [x] Add a theme change option.
 - [x] Refactor the theming code.
-- [ ] Faculty details of current sem
-- [ ] Faculty details
-- [ ] Settings page ?
 - [ ] Add a copy button to the student details.
+- [ ] Notifications at the time of class.
+- [ ] Settings page ?
 - [ ] Refactor the code.
