@@ -23,20 +23,7 @@ class TimeTablePage extends StatelessWidget {
       'Sunday'
     ];
 
-    // List<Color> clrs = [
-    //   Color.fromARGB(255, 241, 32, 154),
-    //   Colors.blue.shade900,
-    //   // Colors.green.shade900,
-    //   Colors.red.shade900,
-    //   Colors.pink.shade700,
-    //   Colors.orange.shade900,
-    //   Colors.yellow.shade900,
-    //   Colors.black
-    // ];
-
     _constructDay(String day) {
-      // Color clr = clrs[days.indexOf(day) % clrs.length];
-
       _expandDay(BuildContext ctx) {
         Navigator.of(context).push(MaterialPageRoute<void>(
           builder: (BuildContext context) =>
@@ -96,7 +83,84 @@ class TimeTableDayPage extends StatelessWidget {
   const TimeTableDayPage({Key? key, required this.day, required this.timeSlots})
       : super(key: key);
 
-  _getSlotInfoWidget(TimeSlot slotInfo) {
+  @override
+  Widget build(BuildContext context) {
+    var timeSlotHeader = Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: const [
+          Expanded(flex: 3, child: Text("Course Name")),
+          Expanded(child: Text("Slot")),
+          Expanded(flex: 2, child: Text("Class Room")),
+          Expanded(flex: 1, child: Text("Time", textAlign: TextAlign.center)),
+        ],
+      ),
+    );
+
+    var boxClr = Theme.of(context).extension<MyColors>()!.boxColor;
+    var timetableBoxDecoration =
+        getTextBoxDecoration(boxClr!, borderRadius: 10);
+
+    _backButton(context) => TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+        );
+
+    return Scaffold(
+      bottomNavigationBar: BottomAppBar(
+        color: Theme.of(context).primaryColor,
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(day, textAlign: TextAlign.center),
+            ),
+            _backButton(context),
+          ],
+        ),
+      ),
+      body: (timeSlots == null)
+          ? const NullPage(errorMsg: "No Time Table Found!, For this day")
+          : SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20.0, 8.0, 20.0, 8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const SizedIcon(icon: Icons.calendar_today_outlined),
+                    Container(
+                      decoration: timetableBoxDecoration,
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.fromLTRB(8.0, 20.0, 8.0, 20.0),
+                        child: Column(
+                          children: [
+                            timeSlotHeader,
+                            const Divider(),
+                            for (var i in timeSlots!)
+                              SlotInfoWidget(slotInfo: i),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 50.0),
+                  ],
+                ),
+              ),
+            ),
+    );
+  }
+}
+
+class SlotInfoWidget extends StatelessWidget {
+  final TimeSlot slotInfo;
+  const SlotInfoWidget({Key? key, required this.slotInfo}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -124,69 +188,6 @@ class TimeTableDayPage extends StatelessWidget {
               ])),
         ],
       ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var timeSlotHeader = Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
-          Expanded(flex: 3, child: Text("Course Name")),
-          Expanded(child: Text("Slot")),
-          Expanded(flex: 2, child: Text("Class Room")),
-          Expanded(flex: 1, child: Text("Time", textAlign: TextAlign.center)),
-        ],
-      ),
-    );
-
-    var boxClr = Theme.of(context).extension<MyColors>()!.boxColor;
-    var timetableBoxDecoration =
-        getTextBoxDecoration(boxClr!, borderRadius: 10);
-
-    return Scaffold(
-      bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).primaryColor,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(day),
-            ],
-          ),
-        ),
-      ),
-      body: (timeSlots == null)
-          ? const NullPage(errorMsg: "No Time Table Found!, For this day")
-          : SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20.0, 8.0, 20.0, 8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const SizedIcon(icon: Icons.calendar_today_outlined),
-                    Container(
-                      decoration: timetableBoxDecoration,
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.fromLTRB(8.0, 20.0, 8.0, 20.0),
-                        child: Column(
-                          children: [
-                            timeSlotHeader,
-                            const Divider(),
-                            for (var i in timeSlots!) _getSlotInfoWidget(i),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 50.0),
-                  ],
-                ),
-              ),
-            ),
     );
   }
 }
