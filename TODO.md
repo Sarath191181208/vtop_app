@@ -6,5 +6,6 @@
 - [x] Refactor the theming code.
 - [ ] Faculty details of current sem
 - [ ] Faculty details
+- [ ] Settings page ?
 - [ ] Add a copy button to the student details.
 - [ ] Refactor the code.
