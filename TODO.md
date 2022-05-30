@@ -5,6 +5,7 @@
 - [x] Add a theme change option.
 - [x] Refactor the theming code.
 - [ ] Add a copy button to the student details.
+- [ ] Change spacer from the static value to relative.
 - [ ] Notifications at the time of class.
 - [ ] Settings page ?
 - [ ] Refactor the code.
