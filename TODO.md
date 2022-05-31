@@ -9,6 +9,7 @@
 - [x] Change spacer from the static value to relative.
 - [ ] Add error code to the failure at the time of  login.
 - [ ] Sort the time table page.
+- [ ] Merge similar times.
 - [ ] Notifications at the time of class.
 - [ ] Settings page ?
 - [ ] Refactor the code.
