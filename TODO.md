@@ -7,6 +7,7 @@
 - [x] Add back button in the time table details page.
 - [x] Add a copy button to the student details.
 - [x] Change spacer from the static value to relative.
+- [ ] Sort the time table page.
 - [ ] Notifications at the time of class.
 - [ ] Settings page ?
 - [ ] Refactor the code.
