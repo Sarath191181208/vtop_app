@@ -1,8 +1,6 @@
 import 'dart:collection';
 import '../../../Student/student_object.dart';
 
-import 'package:flutter/material.dart';
-
 import '../../../notification_service.dart';
 
 import 'package:timezone/timezone.dart' as tz;
@@ -39,7 +37,6 @@ scheduleNotifs(HashMap<String, List<TimeSlot>>? timetable) async {
 
 _scheduleNotifAtDate(int id, DateTime day, TimeSlot timeSlot,
     {required bool isStarting}) async {
-  print(id);
   var clsNotifTime = tz.TZDateTime.from(day, tz.local);
   var preNotifTime = clsNotifTime.subtract(const Duration(minutes: 5));
   // var preNotifTime =
