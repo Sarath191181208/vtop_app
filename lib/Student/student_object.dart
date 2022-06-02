@@ -116,6 +116,49 @@ class TimeSlot {
   }
 }
 
+int _toSec(String time) {
+  var timeSplit = time.split(":");
+  var hour = int.parse(timeSplit[0]);
+  var min = int.parse(timeSplit[1]);
+  return hour * 60 + min;
+}
+
+int _compareTimes(String a, String b) {
+  if (_toSec(a) > _toSec(b)) {
+    return 1;
+  } else if (_toSec(a) < _toSec(b)) {
+    return -1;
+  }
+  return 0;
+}
+
+bool _compareSlots(TimeSlot a, TimeSlot b) {
+  var isSlotSame = (a.courseName == b.courseName);
+  var isTimeOverlapping = (_compareTimes(a.endTime, b.startTime) == 0);
+  var isTimeSame = (_compareTimes(a.endTime, b.endTime) == 0) ||
+      (_compareTimes(a.startTime, b.startTime) == 0);
+
+  return isSlotSame && (isTimeOverlapping || isTimeSame);
+}
+
+List<TimeSlot> _mergeSlots(List<TimeSlot> timeSlots) {
+  List<TimeSlot> mergedSlots = [];
+  if (timeSlots.isEmpty) return mergedSlots;
+
+  mergedSlots.add(timeSlots[0]);
+  for (var i = 1; i < timeSlots.length; i++) {
+    var prevSlot = mergedSlots.last;
+    var currSlot = timeSlots[i];
+
+    if (_compareSlots(prevSlot, currSlot)) {
+      prevSlot.endTime = currSlot.endTime;
+    } else {
+      mergedSlots.add(currSlot);
+    }
+  }
+  return mergedSlots;
+}
+
 class TimeTable {
   HashMap<String, List<TimeSlot>>? timeTable;
   TimeTable(this.timeTable);
@@ -134,6 +177,8 @@ class TimeTable {
         classes.forEach((val) {
           timeSlots.add(TimeSlot.fromJson(val));
         });
+        timeSlots.sort((a, b) => _compareTimes(a.startTime, b.startTime));
+        timeSlots = _mergeSlots(timeSlots);
         timeTable[day] = timeSlots;
       }
     });
