@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vtop_app/pages/student_details_pages/settings_page.dart';
 import '/pages/student_details_pages/academic_details_page.dart';
 
 import '/pages/student_details_pages/academic_summary.dart';
@@ -17,7 +18,7 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  int _pageIndex = 4;
+  int _pageIndex = 0;
 
   @override
   void initState() {
@@ -46,6 +47,10 @@ class _DetailsPageState extends State<DetailsPage> {
       icon: Icon(Icons.person_outline),
       label: 'Profile',
     ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.settings_rounded),
+      label: 'Settings',
+    ),
   ];
 
   @override
@@ -56,6 +61,7 @@ class _DetailsPageState extends State<DetailsPage> {
       AcademicDetails(acadHist: widget.studentDetails.academicHistory.subjects),
       AcademicSummary(summary: widget.studentDetails.academicHistory.summary),
       ProfilePage(studentProfile: widget.studentDetails.profile),
+      const SettingsPage(),
     ];
 
     return Scaffold(

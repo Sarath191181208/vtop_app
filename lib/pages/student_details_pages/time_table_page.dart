@@ -25,6 +25,49 @@ class TimeTablePage extends StatelessWidget {
     );
   }
 
+  int _strToSec(String time) {
+    var timeSplit = time.split(":");
+    var hour = int.parse(timeSplit[0]);
+    var min = int.parse(timeSplit[1]);
+    return hour * 60 + min;
+  }
+
+  Widget _getCurrentClass() {
+    List<String> days = [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday'
+    ];
+
+    var currDay = days[DateTime.now().weekday];
+    var currHour = DateTime.now().hour;
+    var currMin = DateTime.now().minute;
+
+    var currTime = currHour * 60 + currMin;
+
+    var keyExists = timetable!.containsKey(currDay);
+    if (keyExists) {
+      for (var slot in timetable![currDay]!) {
+        var startTime = _strToSec(slot.startTime);
+        var endTime = _strToSec(slot.endTime);
+        // print("stattTime: $startTime endTime: $endTime");
+        if (startTime <= currTime && currTime <= endTime) {
+          return Column(
+            children: [
+              const Text("Current Class:"),
+              SlotInfoWidget(slotInfo: slot),
+            ],
+          );
+        }
+      }
+    }
+    return Container();
+  }
+
   @override
   Widget build(BuildContext context) {
     List<String> days = [
@@ -47,6 +90,7 @@ class TimeTablePage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(children: [
                   const SizedIcon(icon: Icons.calendar_month_outlined),
+                  _getCurrentClass(),
                   for (int i = 0; i < days.length; i++)
                     _constructDay(days[i], context),
                 ]),
