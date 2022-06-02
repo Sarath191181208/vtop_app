@@ -6,6 +6,7 @@ import '/pages/student_details_pages/attendance_page.dart';
 import '/pages/student_details_pages/profile_page.dart';
 
 import '../Student/student_object.dart';
+import 'student_details_pages/Components/scheduleNotifications.dart';
 import 'student_details_pages/time_table_page.dart';
 
 class DetailsPage extends StatefulWidget {
@@ -17,6 +18,12 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   int _pageIndex = 4;
+
+  @override
+  void initState() {
+    scheduleNotifs(widget.studentDetails.getTimeTable());
+    super.initState();
+  }
 
   final List<BottomNavigationBarItem> _bottomNavigationBarItems = [
     const BottomNavigationBarItem(

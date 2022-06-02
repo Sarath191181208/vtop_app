@@ -1,10 +1,10 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import '../../theme_manager.dart';
+import '../../Student/student_object.dart';
+
 import '/pages/student_details_pages/Components/sized_icon.dart';
 import '/pages/student_details_pages/Components/text_box_decoration.dart';
-
-import '../../Student/student_object.dart';
 import '/pages/student_details_pages/Components/null_page.dart';
 
 class TimeTablePage extends StatelessWidget {
@@ -13,7 +13,6 @@ class TimeTablePage extends StatelessWidget {
 
   _constructDay(String day, BuildContext context) {
     var boxClr = Theme.of(context).extension<MyColors>()!.boxColor;
-
     return DayTile(
       day: day,
       clr: boxClr!,
