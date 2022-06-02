@@ -15,7 +15,8 @@
 - [x] Settings page ?
 
 - [ ] Add faculty details.
-- [ ] Redirect to web login page button.
+- [ ] Auto update details.
+- [ ] Redirect to web login page, button.
 - [ ] Add academic calender.
 
 - [ ] Turn off the notifications at a particular date.
