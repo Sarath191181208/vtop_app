@@ -11,6 +11,21 @@ class TimeTablePage extends StatelessWidget {
   final HashMap<String, List<TimeSlot>>? timetable;
   const TimeTablePage({Key? key, this.timetable}) : super(key: key);
 
+  _constructDay(String day, BuildContext context) {
+    var boxClr = Theme.of(context).extension<MyColors>()!.boxColor;
+
+    return DayTile(
+      day: day,
+      clr: boxClr!,
+      onTap: () => {
+        Navigator.of(context).push(MaterialPageRoute<void>(
+          builder: (BuildContext ctx) =>
+              TimeTableDayPage(day: day, timeSlots: timetable![day]),
+        ))
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     List<String> days = [
@@ -23,42 +38,6 @@ class TimeTablePage extends StatelessWidget {
       'Sunday'
     ];
 
-    _constructDay(String day) {
-      _expandDay(BuildContext ctx) {
-        Navigator.of(context).push(MaterialPageRoute<void>(
-          builder: (BuildContext context) =>
-              TimeTableDayPage(day: day, timeSlots: timetable![day]),
-        ));
-      }
-
-      var boxClr = Theme.of(context).extension<MyColors>()!.boxColor;
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GestureDetector(
-          onTap: () => _expandDay(context),
-          child: Hero(
-            tag: day,
-            child: Container(
-              decoration: getTextBoxDecoration(boxClr!),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(8.0, 20.0, 8.0, 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      day,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 20.0),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-
     days.removeWhere((day) => timetable == null || timetable![day] == null);
 
     return (timetable == null)
@@ -69,11 +48,50 @@ class TimeTablePage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(children: [
                   const SizedIcon(icon: Icons.calendar_month_outlined),
-                  for (int i = 0; i < days.length; i++) _constructDay(days[i]),
+                  for (int i = 0; i < days.length; i++)
+                    _constructDay(days[i], context),
                 ]),
               ),
             ),
           );
+  }
+}
+
+class DayTile extends StatelessWidget {
+  final String day;
+  final Function onTap;
+  final Color clr;
+  const DayTile(
+      {Key? key, required this.day, required this.onTap, required this.clr})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        onTap: () => onTap(),
+        child: Hero(
+          tag: day,
+          child: Container(
+            decoration: getTextBoxDecoration(clr),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(8.0, 20.0, 8.0, 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    day,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 20.0),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
