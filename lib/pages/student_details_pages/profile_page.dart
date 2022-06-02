@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:vtop_app/notification_service.dart';
 import '../../prefs/pref_student.dart';
 import '../../theme_manager.dart';
 import '/Student/student_object.dart';
@@ -66,6 +67,13 @@ class ProfilePage extends StatelessWidget {
       ),
     );
 
+    var _notifButton = BoxButton(
+      onPressHandler: () => NotificationService().showNotification(),
+      text: "Test Notification",
+      color: Colors.deepOrange,
+      icon: Icons.notifications_active,
+    );
+
     var _profileTiles = [
       const SizedIcon(icon: Icons.person),
       TextBox(header: "Student Name", text: studentProfile!.name),
@@ -76,6 +84,7 @@ class ProfilePage extends StatelessWidget {
       _updateButton,
       _logoutButton,
       _changeThemeButton,
+      _notifButton,
     ];
 
     // render null if studentProfile is null
