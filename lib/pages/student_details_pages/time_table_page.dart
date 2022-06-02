@@ -43,7 +43,7 @@ class TimeTablePage extends StatelessWidget {
       'Sunday'
     ];
 
-    var currDay = days[DateTime.now().weekday];
+    var currDay = days[DateTime.now().weekday - 1];
     var currHour = DateTime.now().hour;
     var currMin = DateTime.now().minute;
 
