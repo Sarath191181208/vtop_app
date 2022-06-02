@@ -21,7 +21,6 @@ _getDate(String day, String classTime) {
 }
 
 scheduleNotifs(HashMap<String, List<TimeSlot>>? timetable) async {
-  await NotificationService().showNotification();
   int i = 0;
   timetable!.forEach((weekDay, value) {
     for (var timeSlot in value) {
