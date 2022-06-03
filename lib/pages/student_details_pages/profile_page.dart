@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../apis/theme_manager.dart';
+import '../Components/null_page.dart';
+import '../Components/sized_icon.dart';
+import '../Components/text_box_decoration.dart';
 import '/Student/student_object.dart';
-import '/pages/student_details_pages/Components/sized_icon.dart';
-
-import 'Components/null_page.dart';
-import 'Components/text_box_decoration.dart';
 
 Color _textBoxfontColor = Colors.grey;
 // Color _textBoxHeaderColor = Colors.black;

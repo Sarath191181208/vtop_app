@@ -2,10 +2,9 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import '../../apis/theme_manager.dart';
-import '/pages/student_details_pages/Components/null_page.dart';
-import '/pages/student_details_pages/Components/sized_icon.dart';
-
-import 'Components/text_box_decoration.dart';
+import '../Components/null_page.dart';
+import '../Components/sized_icon.dart';
+import '../Components/text_box_decoration.dart';
 
 class AcademicSummary extends StatelessWidget {
   final HashMap<String, double?>? summary;

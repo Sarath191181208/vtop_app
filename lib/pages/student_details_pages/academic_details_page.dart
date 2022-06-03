@@ -1,10 +1,10 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:vtop_app/apis/theme_manager.dart';
-import '/pages/student_details_pages/Components/sized_icon.dart';
 
-import 'Components/null_page.dart';
-import 'Components/text_box_decoration.dart';
+import '../Components/null_page.dart';
+import '../Components/sized_icon.dart';
+import '../Components/text_box_decoration.dart';
 
 class AcademicDetails extends StatelessWidget {
   final HashMap<String, String>? acadHist;

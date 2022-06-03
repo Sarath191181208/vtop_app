@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../apis/theme_manager.dart';
+import '../Components/null_page.dart';
+import '../Components/sized_icon.dart';
+import '../Components/text_box_decoration.dart';
 import '/Student/student_object.dart';
-import '/pages/student_details_pages/Components/null_page.dart';
-import '/pages/student_details_pages/Components/sized_icon.dart';
-import 'Components/text_box_decoration.dart';
 
 class AttendancePage extends StatelessWidget {
   final List<AttendanceInfoSlot>? attendance;

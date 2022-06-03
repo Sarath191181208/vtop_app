@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vtop_app/pages/student_details_pages/settings_page.dart';
+import '../apis/schedule_notifications.dart';
 import '/pages/student_details_pages/academic_details_page.dart';
 
 import '/pages/student_details_pages/academic_summary.dart';
@@ -7,7 +8,6 @@ import '/pages/student_details_pages/attendance_page.dart';
 import '/pages/student_details_pages/profile_page.dart';
 
 import '../Student/student_object.dart';
-import 'student_details_pages/Components/schedule_notifications.dart';
 import 'student_details_pages/time_table_page.dart';
 
 class DetailsPage extends StatefulWidget {

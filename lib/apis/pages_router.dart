@@ -1,6 +1,8 @@
 // build a basic router
 
 import 'package:flutter/material.dart';
+import '../faculty/faculty_object.dart';
+import '../pages/faculty_page.dart';
 import '/pages/home.dart';
 
 import '../Student/student_object.dart';
@@ -25,6 +27,16 @@ class RouteGenerator {
           return MaterialPageRoute(
               builder: (_) => ErrorPage(
                   errorMsg: "The arg in /details must be of type Student",
+                  routeName: settings.name));
+        }
+      case '/faculty':
+        if (args is Faculty) {
+          return MaterialPageRoute(
+              builder: (_) => FacultyPage(facultyList: args.getFaculty()));
+        } else {
+          return MaterialPageRoute(
+              builder: (_) => ErrorPage(
+                  errorMsg: "The arg in /faculty must be of type Faculty",
                   routeName: settings.name));
         }
       default:

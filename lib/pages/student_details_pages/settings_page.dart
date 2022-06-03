@@ -6,9 +6,9 @@ import '../../Student/student_object.dart';
 import '../../apis/notification_service.dart';
 import '../../apis/storage/pref_student.dart';
 import '../../apis/theme_manager.dart';
+import '../Components/sized_icon.dart';
+import '../Components/text_box_decoration.dart';
 import '../dialogs.dart';
-import 'Components/sized_icon.dart';
-import 'Components/text_box_decoration.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
