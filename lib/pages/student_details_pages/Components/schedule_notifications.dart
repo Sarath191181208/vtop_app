@@ -1,7 +1,7 @@
 import 'dart:collection';
 import '../../../Student/student_object.dart';
 
-import '../../../notification_service.dart';
+import '../../../apis/notification_service.dart';
 
 import 'package:timezone/timezone.dart' as tz;
 

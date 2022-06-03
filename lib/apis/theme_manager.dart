@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'prefs/pref_theme.dart';
+import 'storage/pref_theme.dart';
 
 @immutable
 class MyColors extends ThemeExtension<MyColors> {

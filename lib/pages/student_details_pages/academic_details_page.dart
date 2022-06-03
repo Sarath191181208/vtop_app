@@ -1,6 +1,6 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
-import 'package:vtop_app/theme_manager.dart';
+import 'package:vtop_app/apis/theme_manager.dart';
 import '/pages/student_details_pages/Components/sized_icon.dart';
 
 import 'Components/null_page.dart';

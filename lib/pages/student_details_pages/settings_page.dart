@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 
 import '../../Student/fetch_student_details.dart';
 import '../../Student/student_object.dart';
-import '../../notification_service.dart';
-import '../../prefs/pref_student.dart';
-import '../../theme_manager.dart';
+import '../../apis/notification_service.dart';
+import '../../apis/storage/pref_student.dart';
+import '../../apis/theme_manager.dart';
 import '../dialogs.dart';
 import 'Components/sized_icon.dart';
 import 'Components/text_box_decoration.dart';

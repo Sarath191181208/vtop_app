@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import '/pages/home.dart';
 
-import 'Student/student_object.dart';
+import '../Student/student_object.dart';
 import '/pages/login_page.dart';
-import 'pages/student_details.dart';
+import '../pages/student_details.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

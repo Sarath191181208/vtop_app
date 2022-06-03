@@ -1,4 +1,4 @@
-import '../Student/student_object.dart';
+import '../../Student/student_object.dart';
 import 'prefs.dart';
 
 class PrefStudent {

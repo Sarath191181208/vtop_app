@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../theme_manager.dart';
+import '../../apis/theme_manager.dart';
 import '/Student/student_object.dart';
 import '/pages/student_details_pages/Components/null_page.dart';
 import '/pages/student_details_pages/Components/sized_icon.dart';
