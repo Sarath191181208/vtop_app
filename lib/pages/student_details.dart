@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:vtop_app/pages/student_details_pages/settings_page.dart';
 import '../apis/schedule_notifications.dart';
 import '/pages/student_details_pages/academic_details_page.dart';
 
@@ -47,10 +46,6 @@ class _DetailsPageState extends State<DetailsPage> {
       icon: Icon(Icons.person_outline),
       label: 'Profile',
     ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.settings_rounded),
-      label: 'Settings',
-    ),
   ];
 
   @override
@@ -61,7 +56,6 @@ class _DetailsPageState extends State<DetailsPage> {
       AcademicDetails(acadHist: widget.studentDetails.academicHistory.subjects),
       AcademicSummary(summary: widget.studentDetails.academicHistory.summary),
       ProfilePage(studentProfile: widget.studentDetails.profile),
-      const SettingsPage(),
     ];
 
     return Scaffold(
@@ -77,6 +71,13 @@ class _DetailsPageState extends State<DetailsPage> {
           });
         },
       ),
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).primaryColor,
+          child: const Icon(
+            Icons.home_rounded,
+            color: Colors.white,
+          ),
+          onPressed: () => Navigator.pushNamed(context, '/')),
     );
   }
 }
