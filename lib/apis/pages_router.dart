@@ -1,7 +1,9 @@
 // build a basic router
 
 import 'package:flutter/material.dart';
+import 'package:vtop_app/Academic_calender/academic_calender_obj.dart';
 import '../faculty/faculty_object.dart';
+import '../pages/academic_calender_page.dart';
 import '../pages/faculty_page.dart';
 import '/pages/home.dart';
 
@@ -39,6 +41,18 @@ class RouteGenerator {
                   errorMsg: "The arg in /faculty must be of type Faculty",
                   routeName: settings.name));
         }
+      case '/academicCalender':
+        if (args is AcademicCalender) {
+          return MaterialPageRoute(
+              builder: (_) => AcademicCalenderPage(academicCalender: args));
+        } else {
+          return MaterialPageRoute(
+              builder: (_) => ErrorPage(
+                  errorMsg:
+                      "The arg /academicCalender must be of type AcademicCalender",
+                  routeName: settings.name));
+        }
+
       default:
         return MaterialPageRoute(
             builder: (_) => ErrorPage(

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vtop_app/Academic_calender/academic_calender_obj.dart';
+import 'package:vtop_app/Academic_calender/fetch_academic_calender.dart';
+import 'package:vtop_app/apis/storage/pref_academic_calender.dart';
 import 'package:vtop_app/apis/storage/pref_faculty.dart';
 import 'package:vtop_app/faculty/faculty_object.dart';
 import 'package:vtop_app/faculty/fetch_faculty_details.dart';
@@ -31,6 +34,22 @@ class HomePage extends StatelessWidget {
     }
     Navigator.pop(ctx);
     Navigator.pushNamed(ctx, '/faculty', arguments: fac);
+  }
+
+  _handleAcadCalender(BuildContext ctx) async {
+    showLoaderDialog(ctx);
+    AcademicCalender? acad = await PrefAcademicCalender.getAcademicCalender();
+    if (acad == null) {
+      acad = await fetchAcademicCalenders();
+      if (acad == null) {
+        Navigator.pop(ctx);
+        showErrorDialog(ctx,
+            "Couldn't academic details right now. Please try again later.");
+        return;
+      }
+    }
+    Navigator.pop(ctx);
+    Navigator.pushNamed(ctx, '/academicCalender', arguments: acad);
   }
 
   @override
@@ -82,6 +101,25 @@ class HomePage extends StatelessWidget {
       onPressed: () => _handleFaculty(context),
     );
 
+    Widget _academicButton = TextButton(
+      style: TextButton.styleFrom(
+        backgroundColor: Theme.of(context).primaryColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50.0),
+        ),
+        elevation: 10.0,
+      ),
+      child: const Padding(
+        padding: EdgeInsets.only(left: 20.0, right: 20.0),
+        child: Icon(
+          Icons.edit_calendar_rounded,
+          size: 30.0,
+          color: Colors.white,
+        ),
+      ),
+      onPressed: () => _handleAcadCalender(context),
+    );
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -93,6 +131,8 @@ class HomePage extends StatelessWidget {
             _arrowButton,
             const SizedBox(height: 10.0),
             _facultyButton,
+            const SizedBox(height: 10.0),
+            _academicButton,
           ],
         ),
       ),
