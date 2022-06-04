@@ -17,11 +17,17 @@
 - [x] Add faculty details.
 - [x] Add a search bar for faculty.
 - [x] Add academic calender.
-- [ ] Redirect to web login page, button.
+- [x] Change settings page to the home page.
+- [x] Update all details at update in settings.
+- [x] Update the detials asynchronously.
+- [x] Add home floating button.
+- [x] Merge Academics and summary.
+- [x] Add text to the home page buttons.
 
 - [ ] Auto update details.
 - [ ] Turn off the notifications at a particular date.
 - [ ] Smart Notifications : i.e turn off notifs if it's a holiday.
 - [ ] Refactor the code.
+- [-] Redirect to web login page, button.
 - [-] Expand calender on click.
 - [-] Add error code to the failure at the time of login.
