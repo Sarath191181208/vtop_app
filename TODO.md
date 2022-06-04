@@ -24,6 +24,9 @@
 - [x] Merge Academics and summary.
 - [x] Add text to the home page buttons.
 
+- [ ] Add home button to settings page.
+- [ ] Change the back button in bottom nav to home.
+
 - [ ] Auto update details.
 - [ ] Turn off the notifications at a particular date.
 - [ ] Smart Notifications : i.e turn off notifs if it's a holiday.
