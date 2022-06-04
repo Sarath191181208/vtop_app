@@ -10,28 +10,120 @@ class FacultyPage extends StatelessWidget {
   final List<IndividualFaculty> facultyList;
   const FacultyPage({Key? key, required this.facultyList}) : super(key: key);
 
+  Widget _backButton(context) => TextButton(
+        onPressed: () => Navigator.pushNamed(context, '/'),
+        child: const Icon(
+          Icons.arrow_back,
+          color: Colors.white,
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: (facultyList.isEmpty)
-            ? const NullPage(errorMsg: "No faculty found")
-            : SingleChildScrollView(
-                physics: const ScrollPhysics(),
-                child: Column(
-                  children: [
-                    const SizedIcon(icon: Icons.people_outline),
-                    ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: facultyList.length,
-                      itemBuilder: (context, index) {
-                        return IndividualFacultyWidget(
-                            faculty: facultyList[index]);
-                      },
-                    ),
-                  ],
-                ),
-              ));
+      body: (facultyList.isEmpty)
+          ? const NullPage(errorMsg: "No faculty found")
+          : SingleChildScrollView(
+              physics: const ScrollPhysics(),
+              child: Column(
+                children: [
+                  const SizedIcon(icon: Icons.people_outline),
+                  FacListAndSearch(allFacultyList: facultyList),
+                ],
+              ),
+            ),
+      bottomNavigationBar: BottomAppBar(
+        color: Theme.of(context).primaryColor,
+        child: _backButton(context),
+      ),
+    );
+  }
+}
+
+class FacListAndSearch extends StatefulWidget {
+  final List<IndividualFaculty> allFacultyList;
+  const FacListAndSearch({Key? key, required this.allFacultyList})
+      : super(key: key);
+
+  @override
+  State<FacListAndSearch> createState() => _FacListAndSearchState();
+}
+
+class _FacListAndSearchState extends State<FacListAndSearch> {
+  List<IndividualFaculty> _foundFacultyList = [];
+
+  @override
+  void initState() {
+    _foundFacultyList = widget.allFacultyList;
+    super.initState();
+  }
+
+  void _filter(String enteredKeyword) {
+    List<IndividualFaculty> results = [];
+    if (enteredKeyword.isEmpty) {
+      results = widget.allFacultyList;
+    } else {
+      results = widget.allFacultyList
+          .where((fac) =>
+              fac.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .toList();
+    }
+
+    // Refresh the UI
+    setState(() {
+      _foundFacultyList = results;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Widget _searchBar = Padding(
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+        child: TextField(
+          onChanged: (value) => _filter(value),
+          decoration: InputDecoration(
+            hintText: "Search for faculty",
+            labelText: 'Search',
+            hintStyle:
+                const TextStyle(color: Color.fromRGBO(180, 180, 180, 0.6)),
+            labelStyle: const TextStyle(color: Colors.grey),
+            suffixIcon: Icon(
+              Icons.search,
+              color: Theme.of(context).primaryColor,
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(32.0),
+              borderSide: BorderSide(color: Theme.of(context).primaryColor),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(32.0),
+            ),
+            contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          ),
+        ));
+
+    Widget _noResultsText = const Text(
+      'No results found',
+      style: TextStyle(fontSize: 24),
+    );
+
+    return Column(
+      children: [
+        _searchBar,
+        const SizedBox(height: 20),
+        (_foundFacultyList.isEmpty)
+            ? _noResultsText
+            : ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: _foundFacultyList.length,
+                itemBuilder: (context, index) {
+                  return IndividualFacultyWidget(
+                      faculty: _foundFacultyList[index]);
+                },
+              ),
+      ],
+    );
   }
 }
 
@@ -66,8 +158,9 @@ class IndividualFacultyWidget extends StatelessWidget {
                   fit: BoxFit.fill,
                 ),
               ),
+              const SizedBox(height: 10),
               const Divider(
-                thickness: 1,
+                thickness: 2,
               ),
               ListTile(
                 title: Text(faculty.name),

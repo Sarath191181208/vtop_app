@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
       }
     }
     Navigator.pop(ctx);
-    Navigator.pushReplacementNamed(ctx, '/faculty', arguments: fac);
+    Navigator.pushNamed(ctx, '/faculty', arguments: fac);
   }
 
   @override
