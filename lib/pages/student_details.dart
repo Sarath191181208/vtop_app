@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../apis/schedule_notifications.dart';
 import '/pages/student_details_pages/academic_details_page.dart';
 
-import '/pages/student_details_pages/academic_summary.dart';
 import '/pages/student_details_pages/attendance_page.dart';
 import '/pages/student_details_pages/profile_page.dart';
 
@@ -38,10 +37,10 @@ class _DetailsPageState extends State<DetailsPage> {
       icon: Icon(Icons.school_outlined),
       label: 'Academics',
     ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.military_tech_outlined),
-      label: 'Summary',
-    ),
+    // const BottomNavigationBarItem(
+    //   icon: Icon(Icons.military_tech_outlined),
+    //   label: 'Summary',
+    // ),
     const BottomNavigationBarItem(
       icon: Icon(Icons.person_outline),
       label: 'Profile',
@@ -53,8 +52,8 @@ class _DetailsPageState extends State<DetailsPage> {
     List<Widget> _pages = [
       TimeTablePage(timetable: widget.studentDetails.getTimeTable()),
       AttendancePage(attendance: widget.studentDetails.getAttendace()),
-      AcademicDetails(acadHist: widget.studentDetails.academicHistory.subjects),
-      AcademicSummary(summary: widget.studentDetails.academicHistory.summary),
+      AcademicDetails(acadHist: widget.studentDetails.academicHistory),
+      // AcademicSummary(summary: widget.studentDetails.academicHistory.summary),
       ProfilePage(studentProfile: widget.studentDetails.profile),
     ];
 

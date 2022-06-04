@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 class IndividualFaculty {
   String img;
   String name;

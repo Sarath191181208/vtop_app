@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vtop_app/Academic_calender/academic_calender_obj.dart';
-import 'package:vtop_app/faculty/faculty_object.dart';
 
 import '../Academic_calender/fetch_academic_calender.dart';
 import '../Student/fetch_student_details.dart';
-import '../Student/student_object.dart';
 import '../apis/notification_service.dart';
 import '../apis/storage/pref_student.dart';
 import '../apis/theme_manager.dart';
