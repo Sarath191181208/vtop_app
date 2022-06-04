@@ -16,10 +16,11 @@
 
 - [x] Add faculty details.
 - [x] Add a search bar for faculty.
-- [ ] Auto update details.
-- [ ] Redirect to web login page, button.
 - [ ] Add academic calender.
+- [ ] Expand calender on click.
+- [ ] Redirect to web login page, button.
 
+- [ ] Auto update details.
 - [ ] Turn off the notifications at a particular date.
 - [ ] Smart Notifications : i.e turn off notifs if it's a holiday.
 - [ ] Refactor the code.
