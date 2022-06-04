@@ -3,6 +3,7 @@ import 'package:vtop_app/pages/Components/sized_icon.dart';
 
 import '../Academic_calender/academic_calender_obj.dart';
 import 'Components/bottom_nav_with_back_button.dart';
+import 'Components/null_page.dart';
 
 class AcademicCalenderPage extends StatelessWidget {
   final AcademicCalender academicCalender;
@@ -23,28 +24,30 @@ class AcademicCalenderPage extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar:
           bottomNavWithBackButton(context, _backButton(context)),
-      body: Column(
-        children: [
-          const SizedIcon(icon: Icons.edit_calendar_rounded),
-          Expanded(
-            child: ListView.builder(
-              itemCount: _academicCalender.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: Image.network(
-                      _academicCalender[index],
-                      fit: BoxFit.fill,
-                    ),
+      body: (_academicCalender.isEmpty)
+          ? const NullPage(errorMsg: "No Academic Calender Found!")
+          : Column(
+              children: [
+                const SizedIcon(icon: Icons.edit_calendar_rounded),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: _academicCalender.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Image.network(
+                            _academicCalender[index],
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }
