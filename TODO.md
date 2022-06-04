@@ -15,7 +15,7 @@
 - [x] Settings page ?
 
 - [x] Add faculty details.
-- [ ] Add a search bar for faculty.
+- [x] Add a search bar for faculty.
 - [ ] Auto update details.
 - [ ] Redirect to web login page, button.
 - [ ] Add academic calender.
