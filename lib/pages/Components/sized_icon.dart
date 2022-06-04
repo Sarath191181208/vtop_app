@@ -6,8 +6,15 @@ class SizedIcon extends StatelessWidget {
   final Color? color;
   final String? text;
 
+  final double? upperSpacingSize;
+
   const SizedIcon(
-      {Key? key, required this.icon, this.size, this.color, this.text})
+      {Key? key,
+      required this.icon,
+      this.size,
+      this.color,
+      this.text,
+      this.upperSpacingSize})
       : super(key: key);
 
   @override
@@ -15,7 +22,7 @@ class SizedIcon extends StatelessWidget {
     Widget _icon = Row(mainAxisAlignment: MainAxisAlignment.center, children: [
       Icon(
         icon,
-        color: (color == null) ? Theme.of(context).primaryColor : color,
+        color: color ?? Theme.of(context).primaryColor,
         size: size?.toDouble() ?? 50.0,
       )
     ]);
@@ -23,8 +30,18 @@ class SizedIcon extends StatelessWidget {
 
     return Column(
       children: [
-        SizedBox(height: (windowHeight * 0.4)),
+        SizedBox(
+          height: upperSpacingSize ?? (windowHeight * 0.4),
+        ),
         _icon,
+        Text(
+          text ?? '',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: size?.toDouble() ?? 20.0,
+            color: color ?? Theme.of(context).primaryColor,
+          ),
+        ),
         const SizedBox(height: 30.0),
       ],
     );
