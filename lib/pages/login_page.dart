@@ -64,39 +64,16 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     //## login button ##
-    final loginButton = Row(
-      children: [
-        TextButton(
-            style: TextButton.styleFrom(
-              backgroundColor: Theme.of(context).primaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-            ),
-            onPressed: () => _handleLoginPress(context),
-            // onPressed: () => Navigator.pushReplacementNamed(context, '/details',
-            //     arguments: get_student_obj()),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20.0, 3.0, 20.0, 3.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  Text(
-                    "LOGIN",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 8.0),
-                    child: Icon(
-                      Icons.arrow_right_alt_rounded,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            )),
-      ],
+    final _loginButton = CustomButton(
+      text: "LOGIN",
+      onPressed: () => _handleLoginPress(context),
+      icon: Icons.arrow_right_alt_rounded,
+    );
+
+    final _homeButton = CustomButton(
+      text: "HOME",
+      onPressed: () => Navigator.pushReplacementNamed(context, '/'),
+      icon: Icons.home_rounded,
     );
 
     // reutrning login screen
@@ -107,19 +84,17 @@ class _LoginScreenState extends State<LoginScreen> {
           const LoginText(),
 
           //## Login form ##
-          Padding(
-            padding: const EdgeInsets.only(top: 50.0),
-            child: LoginForm(
-                formKey: _formKey,
-                emailController: _userNameController,
-                passwordController: _passwordController),
-          ),
+          const SizedBox(height: 50.0),
+          LoginForm(
+              formKey: _formKey,
+              emailController: _userNameController,
+              passwordController: _passwordController),
 
-          //## Login Button ##
-          Padding(
-            padding: const EdgeInsets.only(top: 30.0),
-            child: loginButton,
-          ),
+          const SizedBox(height: 20.0),
+          _loginButton,
+
+          const SizedBox(height: 10.0),
+          _homeButton,
         ]),
       ),
     );
@@ -271,5 +246,56 @@ class _LoginFormState extends State<LoginForm> {
             passwordInput
           ],
         ));
+  }
+}
+
+class CustomButton extends StatelessWidget {
+  final String text;
+  final Function onPressed;
+  final IconData icon;
+  const CustomButton(
+      {Key? key,
+      required this.text,
+      required this.onPressed,
+      required this.icon})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Theme.of(context).primaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+            ),
+            onPressed: () => onPressed(),
+            // onPressed: () => Navigator.pushReplacementNamed(context, '/details',
+            //     arguments: get_student_obj()),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 3.0, 20.0, 3.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    text,
+                    textAlign: TextAlign.start,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Icon(
+                      icon,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            )),
+      ],
+    );
+    ;
   }
 }
