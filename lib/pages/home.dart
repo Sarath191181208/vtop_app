@@ -5,6 +5,8 @@ import 'package:vtop_app/apis/storage/pref_academic_calender.dart';
 import 'package:vtop_app/apis/storage/pref_faculty.dart';
 import 'package:vtop_app/faculty/faculty_object.dart';
 import 'package:vtop_app/faculty/fetch_faculty_details.dart';
+import 'package:vtop_app/pages/Components/custom_button.dart';
+import 'package:vtop_app/pages/Components/sized_icon.dart';
 import '../apis/storage/pref_student.dart';
 import 'dialogs.dart';
 
@@ -58,109 +60,68 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget _welcomeText = Row(children: [
-      Expanded(
-        child: Text("Welcome !",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 45.0, color: Theme.of(context).primaryColor)),
-      ),
-    ]);
+    Widget _arrowButton = CustomHomeButton(
+        text: "Auto Login",
+        icon: Icons.arrow_right_alt_rounded,
+        onPressed: () => _handleNavigate(context));
 
-    Widget _arrowButton = TextButton(
-      style: TextButton.styleFrom(
-        backgroundColor: Theme.of(context).primaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50.0),
-        ),
-        elevation: 10.0,
-      ),
-      child: const Padding(
-        padding: EdgeInsets.only(left: 20.0, right: 20.0),
-        child: Icon(
-          Icons.arrow_right_alt_rounded,
-          size: 30.0,
-          color: Colors.white,
-        ),
-      ),
-      onPressed: () => _handleNavigate(context),
-    );
-
-    Widget _facultyButton = TextButton(
-      style: TextButton.styleFrom(
-        backgroundColor: Theme.of(context).primaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50.0),
-        ),
-        elevation: 10.0,
-      ),
-      child: const Padding(
-        padding: EdgeInsets.only(left: 20.0, right: 20.0),
-        child: Icon(
-          Icons.people_outline,
-          size: 30.0,
-          color: Colors.white,
-        ),
-      ),
+    Widget _facultyButton = CustomHomeButton(
+      text: "Faculty Details",
+      icon: Icons.people_outline,
       onPressed: () => _handleFaculty(context),
     );
 
-    Widget _academicButton = TextButton(
-      style: TextButton.styleFrom(
-        backgroundColor: Theme.of(context).primaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50.0),
-        ),
-        elevation: 10.0,
-      ),
-      child: const Padding(
-        padding: EdgeInsets.only(left: 20.0, right: 20.0),
-        child: Icon(
-          Icons.edit_calendar_rounded,
-          size: 30.0,
-          color: Colors.white,
-        ),
-      ),
+    Widget _academicButton = CustomHomeButton(
+      text: "Academic Calender",
+      icon: Icons.edit_calendar_rounded,
       onPressed: () => _handleAcadCalender(context),
     );
 
-    Widget _settingsButton = TextButton(
-      style: TextButton.styleFrom(
-        backgroundColor: Theme.of(context).primaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50.0),
-        ),
-        elevation: 10.0,
-      ),
-      child: const Padding(
-        padding: EdgeInsets.only(left: 20.0, right: 20.0),
-        child: Icon(
-          Icons.settings_rounded,
-          size: 30.0,
-          color: Colors.white,
-        ),
-      ),
+    Widget _settingsButton = CustomHomeButton(
+      text: "Settings",
+      icon: Icons.settings_rounded,
       onPressed: () => _handleSettings(context),
     );
 
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _welcomeText,
-            const SizedBox(height: 50.0),
-            _arrowButton,
-            const SizedBox(height: 10.0),
-            _facultyButton,
-            const SizedBox(height: 10.0),
-            _academicButton,
-            const SizedBox(height: 10.0),
-            _settingsButton,
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedIcon(icon: Icons.home_rounded, text: "Home Page"),
+              // const SizedBox(height: 50.0),
+              _settingsButton,
+              const SizedBox(height: 10.0),
+              _arrowButton,
+              const SizedBox(height: 10.0),
+              _facultyButton,
+              const SizedBox(height: 10.0),
+              _academicButton,
+            ],
+          ),
         ),
       ),
+    );
+  }
+}
+
+class CustomHomeButton extends CustomButton {
+  // ignore: use_key_in_widget_constructors
+  const CustomHomeButton(
+      {required String text,
+      required Function onPressed,
+      required IconData icon})
+      : super(text: text, onPressed: onPressed, icon: icon);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        super.build(context),
+      ],
     );
   }
 }
