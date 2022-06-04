@@ -5,6 +5,7 @@ import 'package:vtop_app/Academic_calender/academic_calender_obj.dart';
 import '../faculty/faculty_object.dart';
 import '../pages/academic_calender_page.dart';
 import '../pages/faculty_page.dart';
+import '../pages/settings_page.dart';
 import '/pages/home.dart';
 
 import '../Student/student_object.dart';
@@ -52,6 +53,9 @@ class RouteGenerator {
                       "The arg /academicCalender must be of type AcademicCalender",
                   routeName: settings.name));
         }
+
+      case '/settings':
+        return MaterialPageRoute(builder: (_) => const SettingsPage());
 
       default:
         return MaterialPageRoute(

@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vtop_app/Academic_calender/academic_calender_obj.dart';
+import 'package:vtop_app/faculty/faculty_object.dart';
 
-import '../../Student/fetch_student_details.dart';
-import '../../Student/student_object.dart';
-import '../../apis/notification_service.dart';
-import '../../apis/storage/pref_student.dart';
-import '../../apis/theme_manager.dart';
-import '../Components/sized_icon.dart';
-import '../Components/text_box_decoration.dart';
-import '../dialogs.dart';
+import '../Academic_calender/fetch_academic_calender.dart';
+import '../Student/fetch_student_details.dart';
+import '../Student/student_object.dart';
+import '../apis/notification_service.dart';
+import '../apis/storage/pref_student.dart';
+import '../apis/theme_manager.dart';
+import '../faculty/fetch_faculty_details.dart';
+import 'Components/sized_icon.dart';
+import 'Components/text_box_decoration.dart';
+import 'dialogs.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -24,15 +28,24 @@ class SettingsPage extends StatelessWidget {
     String username = details[0];
     String password = details[1];
 
-    Student? stu = await fetchStudentDetails(username, password);
-    // taking the loading animation off
-    Navigator.pop(context);
+    List<String> names = ['Student', "Faculty", "Academic Calender"];
 
-    if (stu == null) {
-      showErrorDialog(context, "Try again !");
-      // Navigator.pop(ctx);
-    } else {
-      Navigator.pushReplacementNamed(context, '/details', arguments: stu);
+    List<Object?> res = await Future.wait([
+      fetchStudentDetails(username, password),
+      fetchFacultyDetails(),
+      fetchAcademicCalenders(),
+    ]);
+
+    String s = "";
+    for (int j = 0; j < res.length; j++) {
+      if (res[j] == null) {
+        s = s + names[j] + " ";
+      }
+    }
+
+    Navigator.pop(context);
+    if (s.isEmpty) {
+      showErrorDialog(context, "Couldn't update " + s);
     }
   }
 

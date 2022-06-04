@@ -52,6 +52,10 @@ class HomePage extends StatelessWidget {
     Navigator.pushNamed(ctx, '/academicCalender', arguments: acad);
   }
 
+  _handleSettings(BuildContext ctx) {
+    Navigator.pushNamed(ctx, '/settings');
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget _welcomeText = Row(children: [
@@ -120,6 +124,25 @@ class HomePage extends StatelessWidget {
       onPressed: () => _handleAcadCalender(context),
     );
 
+    Widget _settingsButton = TextButton(
+      style: TextButton.styleFrom(
+        backgroundColor: Theme.of(context).primaryColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50.0),
+        ),
+        elevation: 10.0,
+      ),
+      child: const Padding(
+        padding: EdgeInsets.only(left: 20.0, right: 20.0),
+        child: Icon(
+          Icons.settings_rounded,
+          size: 30.0,
+          color: Colors.white,
+        ),
+      ),
+      onPressed: () => _handleSettings(context),
+    );
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -133,6 +156,8 @@ class HomePage extends StatelessWidget {
             _facultyButton,
             const SizedBox(height: 10.0),
             _academicButton,
+            const SizedBox(height: 10.0),
+            _settingsButton,
           ],
         ),
       ),
