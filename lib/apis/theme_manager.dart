@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import 'storage/pref_theme.dart';
 
@@ -37,6 +38,7 @@ class MyColors extends ThemeExtension<MyColors> {
 }
 
 const Color primaryColor = Color.fromRGBO(243, 33, 138, 1);
+// const Color primaryColor = Color.fromARGB(255, 94, 14, 255);
 
 class ThemeNotifier with ChangeNotifier {
   // create a theme with custom colors;
@@ -96,7 +98,8 @@ class ThemeNotifier with ChangeNotifier {
     ),
   ]);
 
-  bool _isDarkTheme = false;
+  bool _isDarkTheme =
+      SchedulerBinding.instance.window.platformBrightness == Brightness.dark;
 
   ThemeData getTheme() => _isDarkTheme ? darkTheme : lightTheme;
 
