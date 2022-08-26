@@ -13,4 +13,9 @@ class PrefTheme {
     bool? data = await pref.getBool(key);
     return (data == null) ? false : data;
   }
+
+  static deleteTheme() async {
+    var pref = SharedPref();
+    await pref.remove(key);
+  }
 }
