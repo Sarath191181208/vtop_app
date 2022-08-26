@@ -20,10 +20,10 @@ class SettingsPage extends StatelessWidget {
 
   _update(context) async {
     showLoaderDialog(context);
-    List<String> details = await PrefStudent.getLoginCredentials();
+    List<String?> details = await PrefStudent.getLoginCredentials();
 
-    String username = details[0];
-    String password = details[1];
+    String? username = details[0];
+    String? password = details[1];
 
     List<String> names = ['Student', "Faculty", "Academic Calender"];
 
@@ -77,11 +77,19 @@ class SettingsPage extends StatelessWidget {
       icon: Icons.notifications_active,
     );
 
+    var _homeButton = BoxButton(
+      onPressHandler: () => Navigator.pushNamed(context, '/'),
+      text: "Home",
+      color: Colors.green,
+      icon: Icons.home,
+    );
+
     var _actionButtons = [
       _logoutButton,
       _updateButton,
       _changeThemeButton,
       _notifButton,
+      _homeButton,
     ];
 
     return Scaffold(

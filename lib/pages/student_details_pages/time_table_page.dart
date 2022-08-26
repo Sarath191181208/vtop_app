@@ -10,6 +10,16 @@ class TimeTablePage extends StatelessWidget {
   final HashMap<String, List<TimeSlot>>? timetable;
   const TimeTablePage({Key? key, this.timetable}) : super(key: key);
 
+  static const List<String> days = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ];
+
   _constructDay(String day, BuildContext context) {
     var boxClr = Theme.of(context).extension<MyColors>()!.boxColor;
     return DayTile(
@@ -17,9 +27,8 @@ class TimeTablePage extends StatelessWidget {
       clr: boxClr!,
       onTap: () => {
         Navigator.of(context).push(MaterialPageRoute<void>(
-          builder: (BuildContext ctx) =>
-              TimeTableDayPage(day: day, timeSlots: timetable![day]),
-        ))
+            builder: (BuildContext ctx) =>
+                SingleDayPage(day: day, timeSlots: timetable![day])))
       },
     );
   }
@@ -32,16 +41,6 @@ class TimeTablePage extends StatelessWidget {
   }
 
   Widget _getCurrentClass() {
-    List<String> days = [
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-      'Sunday'
-    ];
-
     var currDay = days[DateTime.now().weekday - 1];
     var currHour = DateTime.now().hour;
     var currMin = DateTime.now().minute;
@@ -69,17 +68,8 @@ class TimeTablePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> days = [
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-      'Sunday'
-    ];
-
-    days.removeWhere((day) => timetable == null || timetable![day] == null);
+    var _days = [...days]; // copying as days is static
+    _days.removeWhere((day) => timetable == null || timetable![day] == null);
 
     return (timetable == null)
         ? const NullPage(errorMsg: "No Time Table Found! , For this sem")
@@ -90,8 +80,8 @@ class TimeTablePage extends StatelessWidget {
                 child: Column(children: [
                   const SizedIcon(icon: Icons.calendar_month_outlined),
                   _getCurrentClass(),
-                  for (int i = 0; i < days.length; i++)
-                    _constructDay(days[i], context),
+                  for (int i = 0; i < _days.length; i++)
+                    _constructDay(_days[i], context),
                 ]),
               ),
             ),
@@ -137,10 +127,10 @@ class DayTile extends StatelessWidget {
   }
 }
 
-class TimeTableDayPage extends StatelessWidget {
+class SingleDayPage extends StatelessWidget {
   final String day;
   final List<TimeSlot>? timeSlots;
-  const TimeTableDayPage({Key? key, required this.day, required this.timeSlots})
+  const SingleDayPage({Key? key, required this.day, required this.timeSlots})
       : super(key: key);
 
   @override
@@ -190,7 +180,10 @@ class TimeTableDayPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    const SizedIcon(icon: Icons.calendar_today_outlined),
+                    SizedIcon(
+                      icon: Icons.calendar_today_outlined,
+                      text: day,
+                    ),
                     Container(
                       decoration: timetableBoxDecoration,
                       child: Padding(
