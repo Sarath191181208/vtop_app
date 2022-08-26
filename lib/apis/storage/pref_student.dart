@@ -21,10 +21,10 @@ class PrefStudent {
     return (data == null) ? null : Student.fromJson(data);
   }
 
-  static Future<List<String>> getLoginCredentials() async {
+  static Future<List<String?>> getLoginCredentials() async {
     var pref = SharedPref();
-    String username = await pref.get('username');
-    String password = await pref.get('password');
+    String? username = await pref.get('username');
+    String? password = await pref.get('password');
     return [username, password];
   }
 

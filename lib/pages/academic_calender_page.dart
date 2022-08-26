@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vtop_app/pages/Components/sized_icon.dart';
 
 import '../Academic_calender/academic_calender_obj.dart';
-import 'Components/bottom_nav_with_back_button.dart';
+import 'Components/bottom_nav_with_home.dart';
 import 'Components/null_page.dart';
 
 class AcademicCalenderPage extends StatelessWidget {
@@ -10,20 +10,11 @@ class AcademicCalenderPage extends StatelessWidget {
   const AcademicCalenderPage({Key? key, required this.academicCalender})
       : super(key: key);
 
-  Widget _backButton(context) => TextButton(
-        onPressed: () => Navigator.pushNamed(context, '/'),
-        child: const Icon(
-          Icons.arrow_back,
-          color: Colors.white,
-        ),
-      );
-
   @override
   Widget build(BuildContext context) {
     var _academicCalender = academicCalender.getAcademicCalender();
     return Scaffold(
-      bottomNavigationBar:
-          bottomNavWithBackButton(context, _backButton(context)),
+      bottomNavigationBar: bottomNavWithHomeButton(context),
       body: (_academicCalender.isEmpty)
           ? const NullPage(errorMsg: "No Academic Calender Found!")
           : Column(
@@ -36,7 +27,7 @@ class AcademicCalenderPage extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
+                          borderRadius: BorderRadius.circular(5.0),
                           child: Image.network(
                             _academicCalender[index],
                             fit: BoxFit.fill,

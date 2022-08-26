@@ -3,7 +3,7 @@ import 'package:vtop_app/pages/Components/null_page.dart';
 
 import '../apis/theme_manager.dart';
 import '../faculty/faculty_object.dart';
-import 'Components/bottom_nav_with_back_button.dart';
+import 'Components/bottom_nav_with_home.dart';
 import 'Components/sized_icon.dart';
 import 'Components/text_box_decoration.dart';
 
@@ -33,8 +33,7 @@ class FacultyPage extends StatelessWidget {
                 ],
               ),
             ),
-      bottomNavigationBar:
-          bottomNavWithBackButton(context, _backButton(context)),
+      bottomNavigationBar: bottomNavWithHomeButton(context),
     );
   }
 }
