@@ -24,12 +24,13 @@
 - [x] Merge Academics and summary.
 - [x] Add text to the home page buttons.
 
-- [ ] Add home button to settings page.
-- [ ] Change the back button in bottom nav to home.
+- [x] Fixed: when you aren't logged in and clicked update details it updates indefinitely.
+- [x] Add home button to settings page.
+- [x] Change the back button in bottom nav to home.
+- [x] Default to system theme.
 
 - [ ] Auto update details.
 - [ ] Turn off the notifications at a particular date.
-- [ ] Smart Notifications : i.e turn off notifs if it's a holiday.
 - [ ] Refactor the code.
 - [-] Redirect to web login page, button.
 - [-] Expand calender on click.
