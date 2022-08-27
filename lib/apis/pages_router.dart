@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:vtop_app/Academic_calender/academic_calender_obj.dart';
+import 'package:vtop_app/pages/Components/timetable_card.dart';
+import 'package:vtop_app/pages/dev_page.dart';
 import '../faculty/faculty_object.dart';
 import '../pages/academic_calender_page.dart';
 import '../pages/faculty_page.dart';
@@ -56,6 +58,9 @@ class RouteGenerator {
 
       case '/settings':
         return MaterialPageRoute(builder: (_) => const SettingsPage());
+
+      case '/dev':
+        return MaterialPageRoute(builder: (_) => DevPage());
 
       default:
         return MaterialPageRoute(
