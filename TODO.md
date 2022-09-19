@@ -32,6 +32,9 @@
 - [ ] Auto update details.
 - [ ] Change settings to home page.
 - [ ] Change the profile page.
+- [ ] Add a spinner to the faculty details page & cache the images locally.
+- [ ] Change the scroll type in the Academic calender page.
+- [ ] Zoom Academic calender.
 - [ ] Turn off the notifications at a particular date.
 - [ ] Refactor the code.
 - [-] Redirect to web login page, button.
