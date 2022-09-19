@@ -41,7 +41,7 @@ class SettingsPage extends StatelessWidget {
     }
 
     Navigator.pop(context);
-    if (s.isEmpty) {
+    if (s.isNotEmpty) {
       showErrorDialog(context, "Couldn't update " + s);
     }
   }
