@@ -37,6 +37,7 @@
 - [ ] Zoom Academic calender.
 - [ ] Turn off the notifications at a particular date.
 - [ ] Refactor the code.
+- [ ] Fix Notifications.
 - [-] Redirect to web login page, button.
 - [-] Expand calender on click.
 - [-] Add error code to the failure at the time of login.
