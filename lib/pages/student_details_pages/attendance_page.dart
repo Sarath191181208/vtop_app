@@ -83,31 +83,33 @@ class AttendancePage extends StatelessWidget {
       return const NullPage(errorMsg: "No attendance data found for this sem.");
     } else {
       return Scaffold(
-        body: SingleChildScrollView(
-          child: Column(children: [
-            const SizedIcon(icon: Icons.access_time),
-            for (AttendanceInfoSlot attdSlot in attendance!)
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 25.0, right: 25.0, bottom: 15.0),
-                child: Container(
-                  decoration: _attendanceBoxDecoration,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        _header(attdSlot.faculty),
-                        const SizedBox(height: 20.0),
-                        _progressBar(attdSlot.percentage, context),
-                        _tile(attdSlot.typeOfClass,
-                            "${attdSlot.attended} /${attdSlot.totalClasses}"),
-                        _tile(attdSlot.courseName, attdSlot.code),
-                      ],
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(children: [
+              const SizedBox(height: 50.0),
+              for (AttendanceInfoSlot attdSlot in attendance!)
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 25.0, right: 25.0, bottom: 15.0),
+                  child: Container(
+                    decoration: _attendanceBoxDecoration,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          _header(attdSlot.faculty),
+                          const SizedBox(height: 20.0),
+                          _progressBar(attdSlot.percentage, context),
+                          _tile(attdSlot.typeOfClass,
+                              "${attdSlot.attended} /${attdSlot.totalClasses}"),
+                          _tile(attdSlot.courseName, attdSlot.code),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              )
-          ]),
+                )
+            ]),
+          ),
         ),
       );
     }
