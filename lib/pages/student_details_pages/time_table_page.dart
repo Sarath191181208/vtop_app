@@ -5,6 +5,7 @@ import '../../Student/student_object.dart';
 import '../Components/null_page.dart';
 import '../Components/sized_icon.dart';
 import '../Components/text_box_decoration.dart';
+import 'upcomming_class_component.dart';
 
 class TimeTablePage extends StatelessWidget {
   final HashMap<String, List<TimeSlot>>? timetable;
@@ -40,32 +41,6 @@ class TimeTablePage extends StatelessWidget {
     return hour * 60 + min;
   }
 
-  Widget _getCurrentClass() {
-    var currDay = days[DateTime.now().weekday - 1];
-    var currHour = DateTime.now().hour;
-    var currMin = DateTime.now().minute;
-
-    var currTime = currHour * 60 + currMin;
-
-    var keyExists = timetable!.containsKey(currDay);
-    if (keyExists) {
-      for (var slot in timetable![currDay]!) {
-        var startTime = _strToSec(slot.startTime);
-        var endTime = _strToSec(slot.endTime);
-        // print("stattTime: $startTime endTime: $endTime");
-        if (startTime <= currTime && currTime <= endTime) {
-          return Column(
-            children: [
-              const Text("Current Class:"),
-              SlotInfoWidget(slotInfo: slot),
-            ],
-          );
-        }
-      }
-    }
-    return Container();
-  }
-
   @override
   Widget build(BuildContext context) {
     var _days = [...days]; // copying as days is static
@@ -74,15 +49,31 @@ class TimeTablePage extends StatelessWidget {
     return (timetable == null)
         ? const NullPage(errorMsg: "No Time Table Found! , For this sem")
         : Scaffold(
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(children: [
-                  const SizedIcon(icon: Icons.calendar_month_outlined),
-                  _getCurrentClass(),
-                  for (int i = 0; i < _days.length; i++)
-                    _constructDay(_days[i], context),
-                ]),
+            body: SafeArea(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(children: [
+                    const SizedBox(height: 50),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const SizedBox(width: 10),
+                        const Icon(Icons.calendar_today_outlined),
+                        const SizedBox(width: 10),
+                        Text("Today's Classes",
+                            style: Theme.of(context).textTheme.headline6),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    UpcomingClassSliderComponent(
+                      timetable: timetable,
+                    ),
+                    const SizedBox(height: 30),
+                    for (int i = 0; i < _days.length; i++)
+                      _constructDay(_days[i], context),
+                  ]),
+                ),
               ),
             ),
           );
