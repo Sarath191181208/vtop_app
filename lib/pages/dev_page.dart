@@ -2,19 +2,29 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vtop_app/pages/Components/timetable_card.dart';
+
+import '../Student/student_object.dart';
+import '../apis/theme_manager.dart';
 
 class DevPage extends StatelessWidget {
+  const DevPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+    return ChangeNotifierProvider<ThemeNotifier>(
+        create: (_) => ThemeNotifier(),
+        child: Consumer<ThemeNotifier>(builder: (context, notifier, _) {
+          return MaterialApp(
+            title: 'Flutter Demo',
+            debugShowCheckedModeBanner: false,
+            theme: notifier.getTheme(),
+            home: const MyHomePage(title: 'Flutter Dev Page Route: /dev'),
+          );
+        }));
   }
 }
 
@@ -33,72 +43,37 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    Widget _slotCard = TimeTableSlotCard(
+        timeSlot:
+            TimeSlot("TC1", "9:00", "10:00", "416-AB1", "Operating Systems"),
+        status: "Present");
+
+    List<Widget> children = [
+      _slotCard,
+      _slotCard,
+      _slotCard,
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: const Center(
-        child: TimeTableCard(
-          title: "Operating Systems",
-          slot: "Tc1",
-          room: "416-AB1",
-          time: "9:00 - 9:50 AM",
-          label: "Present",
-        ),
-      ),
-    );
-  }
-}
-
-class TimeTableCard extends StatelessWidget {
-  final String title;
-  final String slot;
-  final String room;
-  final String time;
-  final String label;
-
-  const TimeTableCard(
-      {Key? key,
-      required this.title,
-      required this.slot,
-      required this.room,
-      required this.time,
-      required this.label})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    double windowWidth = MediaQuery.of(context).size.width;
-    var boxWidth = windowWidth * 0.8;
-
-    return Container(
-      width: boxWidth,
-      decoration: const BoxDecoration(
-          gradient: LinearGradient(
-        begin: Alignment.topRight,
-        end: Alignment.bottomLeft,
-        colors: [
-          Colors.blue,
-          Colors.red,
-        ],
-      )),
-      child: AspectRatio(
-        aspectRatio: 2.5,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Flexible(child: Text(label)),
-            Expanded(
-              child: RichText(
-                  text: TextSpan(
-                      children: [TextSpan(text: title), TextSpan(text: slot)])),
-            ),
-            Flexible(
-              child: Text(time),
-            )
-          ],
-        ),
-      ),
+      body: CarouselSlider(
+          items: children,
+          options: CarouselOptions(
+            height: 200,
+            aspectRatio: 16 / 9,
+            viewportFraction: 0.8,
+            initialPage: 0,
+            enableInfiniteScroll: false,
+            reverse: false,
+            autoPlay: true,
+            autoPlayInterval: const Duration(seconds: 3),
+            autoPlayAnimationDuration: const Duration(milliseconds: 800),
+            autoPlayCurve: Curves.fastOutSlowIn,
+            enlargeCenterPage: true,
+            scrollDirection: Axis.horizontal,
+          )),
     );
   }
 }
