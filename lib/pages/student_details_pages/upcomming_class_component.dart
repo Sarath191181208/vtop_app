@@ -97,7 +97,7 @@ class UpcomingClassSliderComponentState
         .toList();
 
     return (isValidData()
-        ? Container()
+        ? const Center(child: Text("-"))
         : CarouselSlider(
             items: upcommingClassesCardList,
             options: CarouselOptions(
