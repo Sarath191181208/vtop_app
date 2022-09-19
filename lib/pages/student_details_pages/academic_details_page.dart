@@ -13,14 +13,104 @@ class AcademicDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            AcademicSummary(summary: acadHist.summary),
-            AcademicHistoryWidget(acadHist: acadHist.subjects)
-          ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 50),
+              const SizedIcon(
+                  icon: Icons.military_tech_outlined,
+                  text: "Academic Summary",
+                  upperSpacingSize: 20),
+              AcademicSummary(summary: acadHist.summary),
+              const SizedIcon(
+                icon: Icons.school_outlined,
+                text: "Academic History",
+                upperSpacingSize: 20,
+              ),
+              const SizedBox(height: 20),
+              AcademicHistoryWidget(acadHist: acadHist.subjects)
+            ],
+          ),
         ),
       ),
+    );
+  }
+}
+
+class AcademicSummaryTLDR extends StatelessWidget {
+  final String? creditsEarned;
+  final String? cgpa;
+  const AcademicSummaryTLDR({Key? key, this.creditsEarned, this.cgpa})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Color? boxClr = Theme.of(context).extension<MyColors>()!.boxColor;
+    boxClr = boxClr!;
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          height: 60,
+          width: MediaQuery.of(context).size.width * 0.43,
+          decoration: getTextBoxDecoration(boxClr),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 34,
+                child: Text(
+                  creditsEarned ?? "0",
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              const VerticalDivider(),
+              const SizedBox(
+                width: 20,
+              ),
+              Container(
+                width: 50,
+                child: const Text(
+                  'Credits Earned',
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          height: 60,
+          width: MediaQuery.of(context).size.width * 0.43,
+          decoration: getTextBoxDecoration(boxClr),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 34,
+                child: Text(
+                  cgpa!,
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              const VerticalDivider(),
+              const SizedBox(
+                width: 20,
+              ),
+              const SizedBox(
+                width: 50,
+                child: Text(
+                  'CGPA',
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
@@ -46,6 +136,7 @@ class AcademicSummary extends StatelessWidget {
     if (d == null || d == 0.0) return Colors.grey;
 
     if (s.length < 2) {
+      // cheking if it's grade like S,A,B,C,D,E,F
       if (d < 3) return Colors.red;
       if (d >= 7) return Colors.green;
       if (d >= 3 && d < 7) return const Color.fromRGBO(249, 187, 0, 1);
@@ -59,29 +150,33 @@ class AcademicSummary extends StatelessWidget {
   }
 
   Widget _buildAcadSummary(BuildContext context, Color? boxClr) {
-    return Column(
-      children: [
-        for (var summaryKey in summaryKeys)
-          Padding(
-            padding:
-                const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 10.0),
-            child: Container(
-              // grey border bottomm
-              decoration: getTextBoxDecoration(boxClr!),
-              child: ListTile(
-                title: Text(
-                  summaryKey,
-                ),
-                trailing: Text(
-                  summary![summaryKey].toString(),
-                  style: TextStyle(
-                      color: _getGradeCountColor(
-                          summaryKey, summary![summaryKey])),
+    return Padding(
+      padding: const EdgeInsets.only(left: 20.0, right: 20),
+      child: Column(
+        children: [
+          const AcademicSummaryTLDR(cgpa: "10.0", creditsEarned: "20.0"),
+          const SizedBox(height: 20),
+          for (var summaryKey in summaryKeys)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10.0),
+              child: Container(
+                // grey border bottomm
+                decoration: getTextBoxDecoration(boxClr!),
+                child: ListTile(
+                  title: Text(
+                    summaryKey,
+                  ),
+                  trailing: Text(
+                    summary![summaryKey].toString(),
+                    style: TextStyle(
+                        color: _getGradeCountColor(
+                            summaryKey, summary![summaryKey])),
+                  ),
                 ),
               ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -91,8 +186,6 @@ class AcademicSummary extends StatelessWidget {
 
     return Column(
       children: [
-        const SizedIcon(
-            icon: Icons.military_tech_outlined, text: "Academic Summary"),
         (summary == null)
             ? const CustomNotFoundWidget(txt: "No Academic Summary Found")
             : _buildAcadSummary(context, boxClr),
@@ -144,11 +237,6 @@ class AcademicHistoryWidget extends StatelessWidget {
 
     return Column(
       children: [
-        const SizedIcon(
-          icon: Icons.school_outlined,
-          text: "Academic History",
-          upperSpacingSize: 50.0,
-        ),
         (acadHist == null)
             ? const CustomNotFoundWidget(txt: "No Academic History Found")
             : _buildAcadHist(context, boxClr)
