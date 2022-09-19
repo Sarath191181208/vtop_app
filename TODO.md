@@ -30,6 +30,7 @@
 - [x] Default to system theme.
 
 - [ ] Auto update details.
+- [ ] Change settings to home page.
 - [ ] Turn off the notifications at a particular date.
 - [ ] Refactor the code.
 - [-] Redirect to web login page, button.
